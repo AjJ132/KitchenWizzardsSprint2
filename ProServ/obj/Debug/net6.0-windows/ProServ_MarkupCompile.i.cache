@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\AJ\Documents\C#\Sprint2\ProServ\App.xaml
-1-1644662438
+31052750129
 
-7786865054
-1941709816142
-Views\MainWindow.xaml;
+121701505338
+1991231721590
+MainWindow.xaml;Views\HomePage.xaml;Views\Login.xaml;
 
-False
+True
 

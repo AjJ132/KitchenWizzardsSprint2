@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using ProServ.models;
+using ProServ.Views;
 
 namespace ProServ
 {
@@ -13,5 +17,17 @@ namespace ProServ
     /// </summary>
     public partial class App : Application
     {
+      
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            
+
+            GlobalAccess.CreateGlobalAccess();
+
+            CreateSQLObjects testObjects = new CreateSQLObjects();
+            testObjects.InsertStandardDatabaseObjects();
+
+        
+        }
     }
 }

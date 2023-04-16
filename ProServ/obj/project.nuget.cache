@@ -1,8 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "oruak3sGZOjAALt4hI5zGlcfJFvLs/k4PqKaGWjEFqwEqE54ix9YXJNf60KuNw9oIab7X1m/Yu7xqK1c4BQW0A==",
+  "dgSpecHash": "sk+6+7Tpk4WPL6N9cVGzn8YCbGurZKTwLuvpzrJ0NDqBqpgdyylEzBrZYe1zgEDKCjedbEYx1Xc6ru4N6TOJUQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\AJ\\Documents\\C#\\Sprint2\\ProServ\\ProServ.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\AJ\\.nuget\\packages\\sqlite-net-pcl\\1.8.116\\sqlite-net-pcl.1.8.116.nupkg.sha512",
+    "C:\\Users\\AJ\\.nuget\\packages\\sqlitepclraw.bundle_green\\2.0.4\\sqlitepclraw.bundle_green.2.0.4.nupkg.sha512",
+    "C:\\Users\\AJ\\.nuget\\packages\\sqlitepclraw.core\\2.0.4\\sqlitepclraw.core.2.0.4.nupkg.sha512",
+    "C:\\Users\\AJ\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.0.4\\sqlitepclraw.lib.e_sqlite3.2.0.4.nupkg.sha512",
+    "C:\\Users\\AJ\\.nuget\\packages\\sqlitepclraw.provider.dynamic_cdecl\\2.0.4\\sqlitepclraw.provider.dynamic_cdecl.2.0.4.nupkg.sha512",
+    "C:\\Users\\AJ\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512"
+  ],
   "logs": []
 }

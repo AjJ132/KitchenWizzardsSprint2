@@ -1,0 +1,19 @@
+﻿<Page x:Class="ProServ.Views.Login"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ProServ.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="500"
+      Title="Login">
+
+    <Grid Background="#454545">
+        <TextBox x:Name="Username_tb" HorizontalAlignment="Center" Margin="0,276,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="225" Height="22"/>
+        <TextBox x:Name="Password_tb" HorizontalAlignment="Center" Margin="0,318,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="224" Height="22"/>
+        <Label Content="Login" HorizontalAlignment="Center" Margin="0,81,0,0" VerticalAlignment="Top" FontSize="32" FontFamily="Arial Black"/>
+        <Button x:Name="LoginBtn" Content="Login" HorizontalAlignment="Left" Margin="216,409,0,0" VerticalAlignment="Top" FontSize="32" Background="Green" Click="LoginBtn_Click"/>
+        <Label x:Name="LoginMessage_lb" Content="" HorizontalAlignment="Left" Margin="219,362,0,0" VerticalAlignment="Top" FontSize="22"/>
+
+    </Grid>
+</Page>

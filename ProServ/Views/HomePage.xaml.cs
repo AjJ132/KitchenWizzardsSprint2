@@ -12,27 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Diagnostics;
-using Sprint2.models;
 
-namespace Sprint2
+namespace ProServ.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for HomePage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class HomePage : Page
     {
-        public MainWindow()
+        public HomePage()
         {
             InitializeComponent();
-
-            WindowState = WindowState.Normal;
-            ResizeMode = ResizeMode.NoResize;
-
-            Debug.WriteLine("MainWindow.xaml.cs");
-
-
-            
         }
     }
 }
