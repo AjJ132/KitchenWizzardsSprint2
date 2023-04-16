@@ -13,7 +13,5 @@ namespace Sprint2
     /// </summary>
     public partial class App : Application
     {
-        //My changes will be below
-        //hello world!
     }
 }

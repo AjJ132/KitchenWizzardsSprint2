@@ -23,6 +23,10 @@ namespace Sprint2
         public MainWindow()
         {
             InitializeComponent();
+
+                    WindowState = WindowState.Normal;
+
+                    ResizeMode = ResizeMode.NoResize;
         }
     }
 }
