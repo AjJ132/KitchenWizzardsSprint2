@@ -12,8 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
+using Sprint2.models;
 
-namespace ProServ
+namespace Sprint2
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -23,6 +25,14 @@ namespace ProServ
         public MainWindow()
         {
             InitializeComponent();
+
+            WindowState = WindowState.Normal;
+            ResizeMode = ResizeMode.NoResize;
+
+            Debug.WriteLine("MainWindow.xaml.cs");
+
+
+            
         }
     }
 }
