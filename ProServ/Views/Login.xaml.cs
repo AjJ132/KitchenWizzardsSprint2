@@ -25,6 +25,7 @@ namespace ProServ.Views
         public Login()
         {
             InitializeComponent();
+            
         }
 
         private async void LoginBtn_Click(object sender, RoutedEventArgs e)
@@ -35,7 +36,9 @@ namespace ProServ.Views
 
                 //if login is successful then navigate to the home page
                 HomePage homePage = new HomePage();
+                
                 NavigationService.Navigate(homePage);
+               
             }
             else
             {
@@ -46,8 +49,6 @@ namespace ProServ.Views
             
             
         }
-
-
 
         private async Task<bool> CheckLoginCredentials()
         {
@@ -81,5 +82,7 @@ namespace ProServ.Views
 
 
         }
+
+        
     }
 }
