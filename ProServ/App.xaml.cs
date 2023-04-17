@@ -24,8 +24,10 @@ namespace ProServ
 
             GlobalAccess.CreateGlobalAccess();
 
-            CreateSQLObjects testObjects = new CreateSQLObjects();
-            testObjects.InsertStandardDatabaseObjects();
+
+            //only use this to populate the database with some standard employees
+            //CreateSQLObjects testObjects = new CreateSQLObjects();
+            //testObjects.InsertStandardDatabaseObjects();
 
         
         }
