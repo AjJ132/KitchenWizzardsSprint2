@@ -35,16 +35,10 @@ namespace ProServ
 
             Loaded += (s, e) => { MainFrame.NavigationService.Navigate(new Login()); };
             
-            //AdjustWindowSize( 700, 700);
-
-        }
-
-
-        public  void AdjustWindowSize( int height, int width)
-        {
-            //adjust the window size to specified variables
-            MainFrame.Height = height; MainFrame.Width = width;
             
+
         }
+
+
     }
 }

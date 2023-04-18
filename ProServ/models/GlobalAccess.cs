@@ -16,21 +16,39 @@ namespace ProServ.models
 
         public DBManager dbManager { get; private set; } 
 
+        private List<Zone> zones { get; set; }
+
+        private List<Table> tables { get; set; }
+
         
 
         public Employee currentEmployee { get; private set; }
 
 
         public GlobalAccess() {
+            Debug.WriteLine("Started Global Access");
+
+            InitSequence();
+
+            Debug.WriteLine("Created Global Access");
+        
+        }
+
+        public async Task InitSequence()
+        {
+
+            Debug.WriteLine("Started Init Sequence");
 
             //create database
             this.dbManager = new DBManager();
-            _ = StartDatabase();
+            await StartDatabase();
 
-           
-           
-            Debug.WriteLine("Created Global Access");
-        
+            await ImportZones();
+
+            await ImportTables();
+
+
+            Debug.WriteLine("Finished Init Sequence");
         }
 
         public async Task StartDatabase()
@@ -51,6 +69,30 @@ namespace ProServ.models
                 globalAccess = new GlobalAccess();
             }
             else return;
+        }
+
+
+        //import zones from database
+        private async Task ImportZones()
+        {
+            this.zones = new List<Zone>();
+            this.zones = await this.dbManager.GetZones();
+        }
+
+        private async Task ImportTables()
+        {
+            this.tables = new List<Table>();
+            this.tables = await this.dbManager.GetTables();
+        }
+
+        public List<Table> GetTables()
+        {
+            return this.tables;
+        }
+
+        public string GetZoneHexByID(int id)
+        {
+            return this.zones.Where(n => n.zoneID == id).Select(p => p.zoneHexColor).FirstOrDefault();
         }
 
 

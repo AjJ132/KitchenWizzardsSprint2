@@ -37,6 +37,8 @@ namespace ProServ.Database
                 //Create all tables
                 await _connection.CreateTableAsync<Employee>();
                 await _connection.CreateTableAsync<LoginCredentials>();
+                await _connection.CreateTableAsync<Table>();
+                await _connection.CreateTableAsync<Zone>();
 
                 return true;
             }
@@ -207,7 +209,119 @@ namespace ProServ.Database
             }
         }
 
-       
+        //Zones
+
+        public async Task<List<Zone>> GetZones()
+        {
+            return await this._connection.Table<Zone>().ToListAsync();
+        }
+
+        public async Task<Zone> GetZoneByID(int zoneID)
+        {
+            return await this._connection.Table<Zone>().Where(n => n.zoneID == zoneID).FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> InsertZone(Zone zone)
+        {
+            try
+            {
+                await _connection.InsertAsync(zone);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("There was an error in inserting the zone");
+                Debug.WriteLine(e);
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateZone(Zone zone)
+        {
+            try
+            {
+                await _connection.UpdateAsync(zone);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("There was an error in updating the zone");
+                Debug.WriteLine(e);
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteZone(Zone zone)
+        {
+            try
+            {
+                await _connection.DeleteAsync(zone);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("There was an error in deleting the zone");
+                Debug.WriteLine(e);
+                return false;
+            }
+        }
+
+        //Tables
+
+        public async Task<List<Table>> GetTables()
+        {
+            return await this._connection.Table<Table>().ToListAsync();
+        }
+
+        public async Task<Table> GetTableByID(int tableID)
+        {
+            return await this._connection.Table<Table>().Where(n => n.tableId == tableID).FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> InsertTable(Table table)
+        {
+            try
+            {
+                await _connection.InsertAsync(table);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("There was an error in inserting the table");
+                Debug.WriteLine(e);
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateTable(Table table)
+        {
+            try
+            {
+                await _connection.UpdateAsync(table);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("There was an error in updating the table");
+                Debug.WriteLine(e);
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteTable(Table table)
+        {
+            try
+            {
+                await _connection.DeleteAsync(table);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("There was an error in deleting the table");
+                Debug.WriteLine(e);
+                return false;
+            }
+        }
 
     }
 }

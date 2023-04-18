@@ -8,9 +8,39 @@
        mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920">
 
-    <Grid Background="Red" 
-          >
-        <Label Content="Home" HorizontalAlignment="Center" Margin="0,192,0,0" VerticalAlignment="Top" Height="99" Width="187" FontSize="64"/>
+    <Grid Background="#454545" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.15*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Frame Grid.Column="0"
+               Background="LightGray">
+            
+        </Frame>
+        <Grid Grid.Column="1"
+              ShowGridLines="True"
+              Background="#454545"
+              x:Name="TableGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+
+        </Grid>
 
     </Grid>
 </Page>

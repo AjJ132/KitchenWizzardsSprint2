@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="ProServ.Views.TableControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProServ.Views" d:DataContext="{d:DesignInstance Type=local:TableControl}"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="50">
+
+    
+
+    <UserControl.Resources>
+        <local:ZoneToColorConverter x:Key="ZoneToColorConverter" />
+        <local:StatusToColorConverter x:Key="StatusToColorConverter"/>
+    </UserControl.Resources>
+
+    <Grid Background="{Binding table.zoneID, Converter={StaticResource ZoneToColorConverter}}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label Content="{Binding table.zoneID}" />
+
+        <Rectangle Fill="{Binding table.tableStatus, Converter={StaticResource StatusToColorConverter}}" Stroke="Black" StrokeThickness="1" 
+                   Width="100"
+                   Height="100"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+    </Grid>
+</UserControl>

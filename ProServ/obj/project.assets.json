@@ -255,11 +255,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\AJ\\Documents\\Sprint\\ProServ\\ProServ.csproj",
+      "projectUniqueName": "C:\\Users\\AJ\\Documents\\C#\\Sprint\\ProServ\\ProServ.csproj",
       "projectName": "ProServ",
-      "projectPath": "C:\\Users\\AJ\\Documents\\Sprint\\ProServ\\ProServ.csproj",
+      "projectPath": "C:\\Users\\AJ\\Documents\\C#\\Sprint\\ProServ\\ProServ.csproj",
       "packagesPath": "C:\\Users\\AJ\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\AJ\\Documents\\Sprint\\ProServ\\obj\\",
+      "outputPath": "C:\\Users\\AJ\\Documents\\C#\\Sprint\\ProServ\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
