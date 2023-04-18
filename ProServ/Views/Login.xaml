@@ -17,6 +17,7 @@
         <Label Content="Username" HorizontalAlignment="Center" Margin="0,218,0,0" VerticalAlignment="Top" FontSize="32"/>
         <Label Content="Password" HorizontalAlignment="Left" Margin="884,303,0,0" VerticalAlignment="Top" FontSize="32"/>
         <Label Content="ProServ" Margin="0,45,0,0" VerticalAlignment="Top" FontSize="72" FontFamily="Arial Black" Height="84" Width="320" HorizontalAlignment="Center"/>
+        <Button Content="Bypass&#xD;&#xA;" HorizontalAlignment="Left" Margin="872,583,0,0" VerticalAlignment="Top" Height="59" Width="166" Click="Button_Click"/>
 
     </Grid>
 </Page>

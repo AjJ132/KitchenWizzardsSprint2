@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "sk+6+7Tpk4WPL6N9cVGzn8YCbGurZKTwLuvpzrJ0NDqBqpgdyylEzBrZYe1zgEDKCjedbEYx1Xc6ru4N6TOJUQ==",
+  "dgSpecHash": "D1IhVLefMuRYBoTwRq9kZDaVmS3ULEykJVOXXenMEZOJwDtF7UA/FPSLpcv28bfhwnGQmk4Trp5Q00HLohgRgw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\AJ\\Documents\\C#\\Sprint2\\ProServ\\ProServ.csproj",
+  "projectFilePath": "C:\\Users\\AJ\\Documents\\Sprint\\ProServ\\ProServ.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\AJ\\.nuget\\packages\\sqlite-net-pcl\\1.8.116\\sqlite-net-pcl.1.8.116.nupkg.sha512",
     "C:\\Users\\AJ\\.nuget\\packages\\sqlitepclraw.bundle_green\\2.0.4\\sqlitepclraw.bundle_green.2.0.4.nupkg.sha512",

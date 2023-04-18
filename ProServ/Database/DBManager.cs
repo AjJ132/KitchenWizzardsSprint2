@@ -153,6 +153,12 @@ namespace ProServ.Database
             }
         }
 
+        //Get employee by employee id
+        public async Task<Employee> GetEmployeeByID(int empID)
+        {
+            return await this._connection.Table<Employee>().Where(n => n.Id == empID).FirstOrDefaultAsync();
+        }
+
 
         //login credential functions
 

@@ -63,8 +63,9 @@ namespace ProServ.models
             else { return true; }
         }
 
-        public void SetLogin(Employee newEmployee)
+        public void LogIn(Employee newEmployee)
         {
+            //Sets the current emlployee
             this.currentEmployee = newEmployee;
 
         }
