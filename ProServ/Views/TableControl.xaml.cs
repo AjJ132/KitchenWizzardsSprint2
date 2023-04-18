@@ -51,34 +51,35 @@ namespace ProServ.Views
         {
             ContextMenu contextMenu = new ContextMenu();
 
-            MenuItem item1 = new MenuItem { Header = "Option 1" };
+            MenuItem item1 = new MenuItem { Header = "Check Table", FontSize = 16, Height = 40, Width = 200, Padding = new Thickness(5) };
             item1.Click += Item1_Click;
             contextMenu.Items.Add(item1);
 
-            MenuItem item2 = new MenuItem { Header = "Option 2" };
+            MenuItem item2 = new MenuItem { Header = "Mark as dirty", FontSize = 16, Height = 40, Width = 200, Padding = new Thickness(5) };
             item2.Click += Item2_Click;
             contextMenu.Items.Add(item2);
 
-            MenuItem item3 = new MenuItem { Header = "Option 3" };
+            MenuItem item3 = new MenuItem { Header = "Not sure yet", FontSize = 16, Height = 40, Width = 200, Padding = new Thickness(5) };
             item3.Click += Item3_Click;
             contextMenu.Items.Add(item3);
 
             this.ContextMenu = contextMenu;
         }
-        
+
+
         private void Item1_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Option 1 clicked");
+            MessageBox.Show("Check table");
         }
 
         private void Item2_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Option 2 clicked");
+            MessageBox.Show("Mark as dirty");
         }
 
         private void Item3_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Option 3 clicked");
+            MessageBox.Show("not sure yet");
         }
 
 
