@@ -10,18 +10,20 @@
 
     <Grid Background="#454545" >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.15*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0.2*" />
+            <ColumnDefinition Width="0.8*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.7*" />
             <RowDefinition Height="0.3*" />
         </Grid.RowDefinitions>
 
+		
+		<!-- Tables Tab -->
         <Grid Grid.Column="0"
               Grid.Row="0"
               Grid.RowSpan="2"
-              Background="Blue">
+              Background="#454545">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.2*" />
                 <RowDefinition Height="0.8*" />

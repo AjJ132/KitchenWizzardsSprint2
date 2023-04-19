@@ -23,10 +23,14 @@
         </Grid.RowDefinitions>
         <Label Content="{Binding table.zoneID}" />
 
-        <Rectangle Fill="{Binding table.tableStatus, Converter={StaticResource StatusToColorConverter}}" Stroke="Black" StrokeThickness="1" 
-                   Width="100"
-                   Height="100"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>
+        <Rectangle 
+			x:Name="TableRectangle"
+			Fill="{Binding table.tableStatus, Converter={StaticResource StatusToColorConverter}}" 
+			Stroke="Black" StrokeThickness="1" 
+            Width="100"
+            Height="100"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+			/>
     </Grid>
 </UserControl>

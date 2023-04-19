@@ -1,13 +1,30 @@
 ﻿<Window x:Class="ProServ.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:pr="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProServ"
         mc:Ignorable="d"
         Title="MainWindow" Height="1080" Width="1920"
         >
-    <Grid>
-        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" />
-    </Grid>
+
+
+
+	<DockPanel>
+		<ToolBar DockPanel.Dock="Top">
+			<Button Content="File"/>
+			<Button Content="Edit"/>
+			<!-- Add more buttons for your commands here -->
+		</ToolBar>
+		<Grid>
+			<Grid>
+				<Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" />
+			</Grid>
+		</Grid>
+
+	</DockPanel>
+
+    
 </Window>

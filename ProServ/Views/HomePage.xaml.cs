@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,8 @@ namespace ProServ.Views
     {
         public List<TableControl> tableControls { get; set; }
 
+        public TableControl selectedTable { get; set; }
+
 
 
         public HomePage()
@@ -48,13 +51,14 @@ namespace ProServ.Views
             
             foreach(var i  in tables)
             {
-                tableControls.Add(new TableControl(i));
+                TableControl tableControl = new TableControl(i);
+                tableControl.MouseDown += TableControl_MouseDown;
+                tableControls.Add(tableControl);
             }
 
             tables = null;
             return Task.CompletedTask;
         }
-
 
         //table controls are added to the homepage
         public Task AddTableControls()
@@ -71,5 +75,33 @@ namespace ProServ.Views
             
             return Task.CompletedTask;
         }
+
+
+
+
+        //event handlers
+
+        //Left click on table control
+        private void TableControl_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if(selectedTable != null)
+            {
+                selectedTable.Unselect();
+            }
+
+            //sets selected table to the table control that was clicked
+            selectedTable = sender as TableControl;
+            selectedTable.SetAsSelected();
+
+            Debug.WriteLine("Selected Table: " + this.selectedTable.table.tableId);
+        }
+        
+
+
     }
+
+
+
+
+    
 }

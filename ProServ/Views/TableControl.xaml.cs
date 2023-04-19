@@ -46,6 +46,18 @@ namespace ProServ.Views
             ConfigureContextMenu();
         }
 
+        public void SetAsSelected()
+        {
+            this.TableRectangle.Height = 120;
+            this.TableRectangle.Width = 120;
+        }
+
+        public void Unselect()
+        {
+            this.TableRectangle.Width = 100;
+            this.TableRectangle.Height = 100;
+        }
+
 
         private void ConfigureContextMenu()
         {
