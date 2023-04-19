@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls.Primitives;
 using ProServ.models;
 using SQLite;
 
@@ -39,6 +40,20 @@ namespace ProServ.Database
                 await _connection.CreateTableAsync<LoginCredentials>();
                 await _connection.CreateTableAsync<Table>();
                 await _connection.CreateTableAsync<Zone>();
+                await _connection.CreateTableAsync<CustomerTab>();
+                await _connection.CreateTableAsync<Item>();
+                await _connection.CreateTableAsync<ItemCategory>();
+                
+
+
+                //this is for testing purposes. If the database is empty then insert test data;
+                var emp = await GetEmployees();
+                if(emp.Count == 0 || emp == null)
+                {
+                    CreateSQLObjects testObjects = new CreateSQLObjects();
+                    testObjects.InsertStandardDatabaseObjects();
+                }
+
 
                 return true;
             }
@@ -318,6 +333,200 @@ namespace ProServ.Database
             catch (Exception e)
             {
                 Debug.WriteLine("There was an error in deleting the table");
+                Debug.WriteLine(e);
+                return false;
+            }
+        }
+
+
+        //Tabs get, insert, update, delete, get by id
+        public async Task<List<CustomerTab>> GetCustomerTabs()
+        {
+            return await this._connection.Table<CustomerTab>().ToListAsync();
+        }
+        
+        public async Task<CustomerTab> GetCustomerTabByID(int tabId)
+        {
+            return await this._connection.Table<CustomerTab>().Where(n => n.tabId == tabId).FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> InsertCustomerTab(CustomerTab tab)
+        {
+            try
+            {
+                await _connection.InsertAsync(tab);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("There was an error in inserting the tab");
+                Debug.WriteLine(e);
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateCustomerTab(CustomerTab tab)
+        {
+            try
+            {
+                await _connection.UpdateAsync(tab);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("There was an error in updating the tab");
+                Debug.WriteLine(e);
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteCustomerTab(CustomerTab tab)
+        {
+            try
+            {
+                await _connection.DeleteAsync(tab);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("There was an error in deleting the tab");
+                Debug.WriteLine(e);
+                return false;
+            }
+        }
+
+        public async Task<int> GetRunningTabId()
+        {
+            var tab = await this._connection.Table<CustomerTab>().OrderByDescending(n => n.tabId).FirstOrDefaultAsync();
+            if(tab == null)
+            {
+                return -1;
+            }
+            return tab.tabId;
+
+        }
+
+        public async Task<CustomerTab> GetOpenTabByTableId(int tableId)
+        {
+            var tab = await this._connection.Table<CustomerTab>().OrderByDescending(n => n.tabId).Where(n => n.tableId == tableId).FirstOrDefaultAsync();
+            if(tab == null)
+            {
+                return new CustomerTab();
+                
+            }
+            return tab;
+        }
+
+        //Items
+
+        public async Task<List<Item>> GetItems()
+        {
+            return await this._connection.Table<Item>().ToListAsync();
+        }
+
+        public async Task<Item> GetItemByID(int itemId)
+        {
+            return await this._connection.Table<Item>().Where(n => n.itemId == itemId).FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> InsertItem(Item item)
+        {
+            try
+            {
+                await _connection.InsertAsync(item);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("There was an error in inserting the item");
+                Debug.WriteLine(e);
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateItem(Item item)
+        {
+            try
+            {
+                await _connection.UpdateAsync(item);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("There was an error in updating the item");
+                Debug.WriteLine(e);
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteItem(Item item)
+        {
+            try
+            {
+                await _connection.DeleteAsync(item);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("There was an error in deleting the item");
+                Debug.WriteLine(e);
+                return false;
+            }
+        }
+
+
+        //Categories
+
+        public async Task<List<ItemCategory>> GetItemCategories()
+        {
+            return await this._connection.Table<ItemCategory>().ToListAsync();
+        }
+
+        public async Task<ItemCategory> GetItemCategoryByID(int categoryId)
+        {
+            return await this._connection.Table<ItemCategory>().Where(n => n.categoryId == categoryId).FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> InsertItemCategory(ItemCategory category)
+        {
+            try
+            {
+                await _connection.InsertAsync(category);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("There was an error in inserting the category");
+                Debug.WriteLine(e);
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateItemCategory(ItemCategory category)
+        {
+            try
+            {
+                await _connection.UpdateAsync(category);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("There was an error in updating the category");
+                Debug.WriteLine(e);
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteItemCategory(ItemCategory category)
+        {
+            try
+            {
+                await _connection.DeleteAsync(category);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("There was an error in deleting the category");
                 Debug.WriteLine(e);
                 return false;
             }

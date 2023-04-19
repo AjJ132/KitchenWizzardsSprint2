@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
@@ -15,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ProServ.models;
+using Zone = ProServ.models.Zone;
 
 namespace ProServ.Views
 {
@@ -31,6 +33,7 @@ namespace ProServ.Views
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
+
         public models.Table table
         {
             get { return (models.Table)GetValue(TableProperty); }
@@ -42,58 +45,74 @@ namespace ProServ.Views
             this.table = table;
             InitializeComponent();
 
+            if(this.table.tableStatus != 0)
+            {
+                Debug.WriteLine("Table: " + this.table.tableId + " is taken");
+            }
+
             DataContext = this;
-            ConfigureContextMenu();
         }
 
         public void SetAsSelected()
         {
-            this.TableRectangle.Height = 120;
-            this.TableRectangle.Width = 120;
+            this.TableRectangle.Height = 110;
+            this.TableRectangle.Width = 110;
+            this.TableRectangle.StrokeThickness = 5;
+            this.TableRectangle.Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#454545"));
         }
 
         public void Unselect()
         {
-            this.TableRectangle.Width = 100;
             this.TableRectangle.Height = 100;
+            this.TableRectangle.Width = 100;
+            this.TableRectangle.StrokeThickness = 1;
+            this.TableRectangle.Stroke = Brushes.Black;
         }
+    
 
+        
 
-        private void ConfigureContextMenu()
+        private async void Check_Table_Click(object sender, RoutedEventArgs e)
         {
-            ContextMenu contextMenu = new ContextMenu();
+            //logic to check customer into their table
+            CustomerTab newTab = new CustomerTab(this.table.tableId);
 
-            MenuItem item1 = new MenuItem { Header = "Check Table", FontSize = 16, Height = 40, Width = 200, Padding = new Thickness(5) };
-            item1.Click += Item1_Click;
-            contextMenu.Items.Add(item1);
+            //Write to database
+            await GlobalAccess.globalAccess.dbManager.InsertCustomerTab(newTab);
 
-            MenuItem item2 = new MenuItem { Header = "Mark as dirty", FontSize = 16, Height = 40, Width = 200, Padding = new Thickness(5) };
-            item2.Click += Item2_Click;
-            contextMenu.Items.Add(item2);
+            this.table.SetCustomerTab(newTab);
 
-            MenuItem item3 = new MenuItem { Header = "Not sure yet", FontSize = 16, Height = 40, Width = 200, Padding = new Thickness(5) };
-            item3.Click += Item3_Click;
-            contextMenu.Items.Add(item3);
+            this.table.tableStatus = 1;
 
-            this.ContextMenu = contextMenu;
+            await GlobalAccess.globalAccess.dbManager.UpdateTable(this.table);
         }
 
-
-        private void Item1_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Check table");
-        }
-
-        private void Item2_Click(object sender, RoutedEventArgs e)
+        private void Mark_As_Dirty_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Mark as dirty");
+
+            this.table.tableStatus = 2;
+
+            GlobalAccess.globalAccess.dbManager.UpdateTable(this.table);
+
+            this.TableRectangle.Fill = Brushes.Red;
         }
 
-        private void Item3_Click(object sender, RoutedEventArgs e)
+        private void Mark_As_Clean(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("not sure yet");
+            this.table.tableStatus = 0;
+
+            GlobalAccess.globalAccess.dbManager.UpdateTable(this.table);
+
+            this.TableRectangle.Fill = Brushes.Green;
         }
+
+       
+
+       
+
 
 
     }
 }
+

@@ -4,9 +4,28 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ProServ.Views"
+      
       Title="HomePage"
        mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920">
+
+    <Page.Resources>
+
+        <local:ItemsToStringConverter x:Key="ItemsToStringConverter" />
+
+        <DataTemplate x:Key="CustomerTabTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="{Binding tableId}" FontWeight="Bold" />
+                <TextBlock Grid.Row="1" Text="{Binding items, Converter={StaticResource ItemsToStringConverter}}" TextWrapping="Wrap" />
+            </Grid>
+        </DataTemplate>
+
+    </Page.Resources>
+
 
     <Grid Background="#454545" >
         <Grid.ColumnDefinitions>
@@ -28,7 +47,20 @@
                 <RowDefinition Height="0.2*" />
                 <RowDefinition Height="0.8*" />
             </Grid.RowDefinitions>
-           
+
+            <ContentControl Grid.Column="0"
+                Grid.Row="1"
+                Content="{Binding selectedCustomerTab}"
+                ContentTemplate="{StaticResource CustomerTabTemplate}"
+                Background="#454545"
+                VerticalAlignment="Stretch" />
+
+            <Button Grid.Column="0"
+        Grid.Row="2"
+        Content="Check Out"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Top"
+        Margin="10" />
         </Grid>
   
         <Grid Grid.Column="1"
@@ -55,6 +87,7 @@
             
 
         </Grid>
+        
         <Grid Grid.Column="1"
               Grid.Row="1">
             <Grid.ColumnDefinitions>

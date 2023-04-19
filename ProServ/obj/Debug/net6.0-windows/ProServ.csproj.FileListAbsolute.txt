@@ -113,12 +113,15 @@ C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\ProServ.csproj.
 C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\MainWindow.g.cs
 C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\Views\HomePage.g.cs
 C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\Views\Login.g.cs
+C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\Views\TableControl.g.cs
 C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\App.g.cs
+C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
 C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\ProServ_MarkupCompile.cache
 C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\ProServ_MarkupCompile.lref
 C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\MainWindow.baml
 C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\Views\HomePage.baml
 C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\Views\Login.baml
+C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\Views\TableControl.baml
 C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\ProServ.g.resources
 C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\ProServ.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\ProServ.AssemblyInfoInputs.cache
@@ -130,6 +133,3 @@ C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\refint\ProServ.
 C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\ProServ.pdb
 C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\ProServ.genruntimeconfig.cache
 C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\ref\ProServ.dll
-C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\Views\TableControl.g.cs
-C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
-C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\Views\TableControl.baml

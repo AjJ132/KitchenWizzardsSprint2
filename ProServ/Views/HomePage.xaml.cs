@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -24,11 +25,25 @@ namespace ProServ.Views
 
     
 
-    public partial class HomePage : Page
+    public partial class HomePage : Page , INotifyPropertyChanged
     {
         public List<TableControl> tableControls { get; set; }
 
         public TableControl selectedTable { get; set; }
+
+        private CustomerTab _selectedCustomerTab;
+        public CustomerTab selectedCustomerTab
+        {
+            get { return _selectedCustomerTab; }
+            set
+            {
+                if (_selectedCustomerTab != value)
+                {
+                    _selectedCustomerTab = value;
+                    OnPropertyChanged(nameof(selectedCustomerTab));
+                }
+            }
+        }
 
 
 
@@ -40,20 +55,30 @@ namespace ProServ.Views
             SetTableControls();
             AddTableControls();
 
+            DataContext = this;
+
             
         }
 
         //tables are imported and each table control is assigned a table
-        public Task SetTableControls()
+        public async Task<Task> SetTableControls()
         {
             List<models.Table> tables = GlobalAccess.globalAccess.GetTables();
             tableControls = new List<TableControl>();
             
             foreach(var i  in tables)
             {
+                if (i.tableStatus == 1)
+                {
+                    var tab = await GlobalAccess.globalAccess.dbManager.GetOpenTabByTableId(i.tableId);
+                    i.SetCustomerTab(tab);
+                }
+
                 TableControl tableControl = new TableControl(i);
-                tableControl.MouseDown += TableControl_MouseDown;
+                tableControl.MouseLeftButtonDown += TableControl_LeftMouseDown;
                 tableControls.Add(tableControl);
+
+                
             }
 
             tables = null;
@@ -82,7 +107,7 @@ namespace ProServ.Views
         //event handlers
 
         //Left click on table control
-        private void TableControl_MouseDown(object sender, MouseButtonEventArgs e)
+        private void TableControl_LeftMouseDown(object sender, MouseButtonEventArgs e)
         {
             if(selectedTable != null)
             {
@@ -90,12 +115,45 @@ namespace ProServ.Views
             }
 
             //sets selected table to the table control that was clicked
+
             selectedTable = sender as TableControl;
             selectedTable.SetAsSelected();
 
+            if(selectedTable.table.tableStatus == 1)
+            {
+                ShowCustomerTab();
+            }
+            else
+            {
+                //Show logic to give option to create new tab
+            }
+
             Debug.WriteLine("Selected Table: " + this.selectedTable.table.tableId);
         }
-        
+
+        private async void ShowCustomerTab()
+        {
+            this.selectedCustomerTab = selectedTable.table.currentTab as CustomerTab;
+            string s = "";
+        }
+
+        private async void AllowCreateCustomerTab()
+        {
+            Debug.WriteLine("You can create a tab");
+        }
+
+
+
+
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
 
 
     }

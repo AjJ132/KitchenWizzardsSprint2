@@ -45,38 +45,38 @@ namespace ProServ.models
         public void CreateTables()
         {
             //left section tables
-            this.tables.Add(new Table(4, 0, 101, 0, 0, 0));
-            this.tables.Add(new Table(4, 0, 101, 0, 0, 1));
-            this.tables.Add(new Table(4, 0, 101, 0, 1, 0));
-            this.tables.Add(new Table(4, 0, 101, 0, 1, 1));
-            this.tables.Add(new Table(4, 0, 101, 0, 2, 0));
-            this.tables.Add(new Table(4, 0, 102, 0, 2, 1));
-            this.tables.Add(new Table(4, 0, 101, 0, 3, 0));
-            this.tables.Add(new Table(4, 0, 101, 0, 3, 1));
-            this.tables.Add(new Table(4, 0, 101, 0, 4, 0));
-            this.tables.Add(new Table(4, 0, 101, 0, 4, 1));
-            this.tables.Add(new Table(4, 0, 101, 0, 5, 0));
-            this.tables.Add(new Table(4, 0, 101, 0, 5, 1));
+            this.tables.Add(new Table(4, 0, 1, 0, 0, 0));
+            this.tables.Add(new Table(4, 0, 1, 0, 0, 1));
+            this.tables.Add(new Table(4, 0, 1, 0, 1, 0));
+            this.tables.Add(new Table(4, 0, 1, 0, 1, 1));
+            this.tables.Add(new Table(4, 0, 1, 0, 2, 0));
+            this.tables.Add(new Table(4, 0, 1, 0, 2, 1));
+            this.tables.Add(new Table(4, 0, 1, 0, 3, 0));
+            this.tables.Add(new Table(4, 0, 1, 0, 3, 1));
+            this.tables.Add(new Table(4, 0, 1, 0, 4, 0));
+            this.tables.Add(new Table(4, 0, 1, 0, 4, 1));
+            this.tables.Add(new Table(4, 0, 1, 0, 5, 0));
+            this.tables.Add(new Table(4, 0, 1, 0, 5, 1));
 
             //middle section below the bar
-            this.tables.Add(new Table(4, 0, 102, 0, 4, 2));
-            this.tables.Add(new Table(4, 0, 102, 0, 4, 3));
-            this.tables.Add(new Table(4, 0, 102, 0, 5, 2));
-            this.tables.Add(new Table(4, 0, 102, 0, 5, 3));
+            this.tables.Add(new Table(4, 0, 2, 0, 4, 2));
+            this.tables.Add(new Table(4, 0, 2, 0, 4, 3));
+            this.tables.Add(new Table(4, 0, 2, 0, 5, 2));
+            this.tables.Add(new Table(4, 0, 2, 0, 5, 3));
 
             //right section tables
-            this.tables.Add(new Table(4, 0, 103, 0, 0, 4));
-            this.tables.Add(new Table(4, 0, 103, 0, 0, 5));
-            this.tables.Add(new Table(4, 0, 103, 0, 1, 4));
-            this.tables.Add(new Table(4, 0, 103, 0, 1, 5));
-            this.tables.Add(new Table(4, 0, 103, 0, 2, 4));
-            this.tables.Add(new Table(4, 0, 103, 0, 2, 5));
-            this.tables.Add(new Table(4, 0, 103, 0, 3, 4));
-            this.tables.Add(new Table(4, 0, 103, 0, 3, 5));
-            this.tables.Add(new Table(4, 0, 103, 0, 4, 4));
-            this.tables.Add(new Table(4, 0, 103, 0, 4, 5));
-            this.tables.Add(new Table(4, 0, 103, 0, 5, 4));
-            this.tables.Add(new Table(4, 0, 103, 0, 5, 5));
+            this.tables.Add(new Table(4, 0, 3, 0, 0, 4));
+            this.tables.Add(new Table(4, 0, 3, 0, 0, 5));
+            this.tables.Add(new Table(4, 0, 3, 0, 1, 4));
+            this.tables.Add(new Table(4, 0, 3, 0, 1, 5));
+            this.tables.Add(new Table(4, 0, 3, 0, 2, 4));
+            this.tables.Add(new Table(4, 0, 3, 0, 2, 5));
+            this.tables.Add(new Table(4, 0, 3, 0, 3, 4));
+            this.tables.Add(new Table(4, 0, 3, 0, 3, 5));
+            this.tables.Add(new Table(4, 0, 3, 0, 4, 4));
+            this.tables.Add(new Table(4, 0, 3, 0, 4, 5));
+            this.tables.Add(new Table(4, 0, 3, 0, 5, 4));
+            this.tables.Add(new Table(4, 0, 3, 0, 5, 5));
 
 
         }

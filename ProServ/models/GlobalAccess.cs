@@ -20,6 +20,8 @@ namespace ProServ.models
 
         private List<Table> tables { get; set; }
 
+        public int runningTabId = 0;
+
         
 
         public Employee currentEmployee { get; private set; }
@@ -42,6 +44,12 @@ namespace ProServ.models
             //create database
             this.dbManager = new DBManager();
             await StartDatabase();
+
+            this.runningTabId = await this.dbManager.GetRunningTabId();
+            if(runningTabId == -1)
+            {
+                runningTabId = 1;
+            }
 
             await ImportZones();
 
@@ -78,6 +86,8 @@ namespace ProServ.models
             this.zones = new List<Zone>();
             this.zones = await this.dbManager.GetZones();
         }
+
+        public List<Zone> GetZones() { return this.zones; }
 
         private async Task ImportTables()
         {

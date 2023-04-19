@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ProServ.Views" d:DataContext="{d:DesignInstance Type=local:TableControl}"
+             xmlns:local="clr-namespace:ProServ.Views" 
+             d:DataContext="{d:DesignInstance Type=local:TableControl}"
              mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="50">
 
@@ -23,7 +24,8 @@
         </Grid.RowDefinitions>
         <Label Content="{Binding table.zoneID}" />
 
-        <Rectangle 
+        <Grid>
+            <Rectangle 
 			x:Name="TableRectangle"
 			Fill="{Binding table.tableStatus, Converter={StaticResource StatusToColorConverter}}" 
 			Stroke="Black" StrokeThickness="1" 
@@ -31,6 +33,61 @@
             Height="100"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-			/>
+            
+			>
+
+                <Rectangle.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Check Table" Click="Check_Table_Click">
+                            <MenuItem.Style>
+                                <Style TargetType="MenuItem">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                    <Setter Property="FontSize" Value="16" />
+                                    <Setter Property="Height" Value="40" />
+                                    <Setter Property="Width" Value="200" />
+                                    <Setter Property="Padding" Value="5" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding table.tableStatus}" Value="1">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding table.tableStatus}" Value="2">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </MenuItem.Style>
+                        </MenuItem>
+                        <MenuItem Header="Mark as dirty" Click="Mark_As_Dirty_Click">
+                            <MenuItem.Style>
+                                <Style TargetType="MenuItem">
+                                    <Setter Property="FontSize" Value="16" />
+                                    <Setter Property="Height" Value="40" />
+                                    <Setter Property="Width" Value="200" />
+                                    <Setter Property="Padding" Value="5" />
+                                </Style>
+                            </MenuItem.Style>
+                        </MenuItem>
+                        <MenuItem Header="Mark as clean" Click="Mark_As_Clean">
+                            <MenuItem.Style>
+                                <Style TargetType="MenuItem">
+                                    <Setter Property="FontSize" Value="16" />
+                                    <Setter Property="Height" Value="40" />
+                                    <Setter Property="Width" Value="200" />
+                                    <Setter Property="Padding" Value="5" />
+                                </Style>
+                            </MenuItem.Style>
+                        </MenuItem>
+                    </ContextMenu>
+                </Rectangle.ContextMenu>
+
+
+            </Rectangle>
+            <TextBlock Text="{Binding table.tableId}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Grid>
+
+        
     </Grid>
 </UserControl>
+
+
+
