@@ -68,11 +68,12 @@ namespace ProServ.Views
             
             foreach(var i  in tables)
             {
+                /*
                 if (i.tableStatus == 1)
                 {
                     var tab = await GlobalAccess.globalAccess.dbManager.GetOpenTabByTableId(i.tableId);
                     i.SetCustomerTab(tab);
-                }
+                } */
 
                 TableControl tableControl = new TableControl(i);
                 tableControl.MouseLeftButtonDown += TableControl_LeftMouseDown;

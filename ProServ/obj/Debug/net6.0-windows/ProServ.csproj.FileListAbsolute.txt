@@ -133,3 +133,6 @@ C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\refint\ProServ.
 C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\ProServ.pdb
 C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\ProServ.genruntimeconfig.cache
 C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\ref\ProServ.dll
+C:\Users\AJ\Documents\Sprint\ProServ\obj\Debug\net6.0-windows\Views\TableControl.g.cs
+C:\Users\AJ\Documents\Sprint\ProServ\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\AJ\Documents\Sprint\ProServ\obj\Debug\net6.0-windows\Views\TableControl.baml

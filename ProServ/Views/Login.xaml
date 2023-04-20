@@ -4,20 +4,35 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ProServ.Views"
-      mc:Ignorable="d" 
-      d:DesignHeight="1080" d:DesignWidth="1920"
       Title="Login">
 
     <Grid Background="#454545">
-        <TextBox x:Name="Username_tb" HorizontalAlignment="Center" Margin="0,276,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="225" Height="22"/>
-        <TextBox x:Name="Password_tb" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="224" Height="22" Margin="843,355,0,0" />
-        <Label Content="Login" HorizontalAlignment="Left" Margin="869,158,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Arial Black" Height="79" Width="173"/>
-        <Button x:Name="LoginBtn" Content="Login" HorizontalAlignment="Left" Margin="866,417,0,0" VerticalAlignment="Top" FontSize="48" Background="Green" Click="LoginBtn_Click" Height="74" Width="178"/>
-        <Label x:Name="LoginMessage_lb" Content="" HorizontalAlignment="Left" Margin="819,355,0,0" VerticalAlignment="Top" FontSize="22"/>
-        <Label Content="Username" HorizontalAlignment="Center" Margin="0,218,0,0" VerticalAlignment="Top" FontSize="32"/>
-        <Label Content="Password" HorizontalAlignment="Left" Margin="884,303,0,0" VerticalAlignment="Top" FontSize="32"/>
-        <Label Content="ProServ" Margin="0,45,0,0" VerticalAlignment="Top" FontSize="72" FontFamily="Arial Black" Height="84" Width="320" HorizontalAlignment="Center"/>
-        <Button Content="Bypass&#xD;&#xA;" HorizontalAlignment="Left" Margin="872,583,0,0" VerticalAlignment="Top" Height="59" Width="166" Click="Button_Click"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
+        <Label Grid.Row="0" Grid.Column="1" Content="ProServ" VerticalAlignment="Top"  FontSize="72" FontFamily="Arial Black" HorizontalAlignment="Center"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="Login" FontSize="48" FontFamily="Arial Black" HorizontalAlignment="Center"/>
+            <Label Content="Username" FontSize="32" HorizontalAlignment="Center"/>
+            <TextBox x:Name="Username_tb" TextWrapping="Wrap" Width="225" Height="22" HorizontalAlignment="Center"/>
+            <Label Content="Password" FontSize="32" HorizontalAlignment="Center"/>
+            <TextBox x:Name="Password_tb" TextWrapping="Wrap" Width="224" Height="22" HorizontalAlignment="Center"/>
+            <Label x:Name="LoginMessage_lb" FontSize="22" HorizontalAlignment="Center"/>
+            <Button x:Name="LoginBtn" Content="Login" FontSize="48" HorizontalAlignment="Center" Background="Green" Click="LoginBtn_Click" Height="74" Width="178"/>
+            <Button Content="Bypass" Click="Button_Click" Height="59" Width="166" HorizontalAlignment="Center"/>
+        </StackPanel>
     </Grid>
+
+
+
+
 </Page>

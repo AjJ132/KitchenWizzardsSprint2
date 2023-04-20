@@ -27,16 +27,26 @@ namespace ProServ
         {
             InitializeComponent();
 
-           WindowState = WindowState.Normal;
            //disallow resizing  
-              ResizeMode = ResizeMode.NoResize;
+              //ResizeMode = ResizeMode.NoResize;
 
             Debug.WriteLine("MainWindow.xaml.cs");
 
+            //This loads the login page in the main window
+            //MainWindow is the border or parent that holds a page
             Loaded += (s, e) => { MainFrame.NavigationService.Navigate(new Login()); };
-            
-            
 
+            this.Loaded += MainWindow_Loaded;
+
+
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Width = SystemParameters.PrimaryScreenWidth;
+            this.Height = SystemParameters.WorkArea.Height;
+            this.Top = 0;
+            this.Left = 0;
         }
 
 
