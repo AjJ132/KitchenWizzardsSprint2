@@ -1,9 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\ProServ",
-    "\\ProServ\\models"
+    ""
   ],
-  "SelectedNode": "\\ProServ\\models\\LoginCredentials.cs",
+  "SelectedNode": "\\ProServ.sln",
   "PreviewInSolutionExplorer": false
 }

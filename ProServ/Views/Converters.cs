@@ -58,7 +58,8 @@ namespace ProServ.Views
             var items = value as List<Item>;
             if (items == null) return string.Empty;
 
-            return string.Join(", ", items.Select(x => x.itemName));
+            List<String> newItems = items.Select(p => p.itemName).ToList();
+            return newItems;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -18,6 +18,11 @@ namespace ProServ.models
         {
         }
 
+        public Item(string itemName)
+        {
+            this.itemName = itemName;
+        }
+
         public Item(string itemName, int categoryId, double itemPrice)
         {
             this.itemName = itemName;

@@ -29,8 +29,10 @@ namespace ProServ.Views
     {
         public List<TableControl> tableControls { get; set; }
 
-        public TableControl selectedTable { get; set; }
+        public ProServ.Views.TableControl selectedTable { get; set; }
 
+
+        //this is for data-binding and UI updating dont remove <-- INotifyPropertyChanged
         private CustomerTab _selectedCustomerTab;
         public CustomerTab selectedCustomerTab
         {
@@ -52,14 +54,17 @@ namespace ProServ.Views
 
             InitializeComponent();
 
-            SetTableControls();
-            AddTableControls();
+            //SetTableControls();
+            //AddTableControls();
+
+            _ = InitializeAndAddTableControls();
 
             DataContext = this;
 
             
         }
 
+        /*
         //tables are imported and each table control is assigned a table
         public async Task<Task> SetTableControls()
         {
@@ -68,12 +73,15 @@ namespace ProServ.Views
             
             foreach(var i  in tables)
             {
-                /*
+                Debug.WriteLine($"Processing Table: {i.tableId}");
+
                 if (i.tableStatus == 1)
                 {
-                    var tab = await GlobalAccess.globalAccess.dbManager.GetOpenTabByTableId(i.tableId);
+                    var tab = await GlobalAccess.globalAccess.dbManager.GetOpenTabByTableId(i.tableId).ConfigureAwait(false);
+                    tab.items.Add(new Item("Apple"));
+                    tab.items.Add(new Item("Bread"));
                     i.SetCustomerTab(tab);
-                } */
+                } 
 
                 TableControl tableControl = new TableControl(i);
                 tableControl.MouseLeftButtonDown += TableControl_LeftMouseDown;
@@ -93,12 +101,50 @@ namespace ProServ.Views
 
             foreach(var i in tableControls)
             {
+                Debug.WriteLine($"Adding Table: {i.table.tableId}");
 
                 this.TableGrid.Children.Add(i);
                 Grid.SetColumn(i, i.table.columnID);
                 Grid.SetRow(i, i.table.rowID);
             }
             
+            return Task.CompletedTask;
+        }
+
+        */
+
+        public async Task<Task> InitializeAndAddTableControls()
+        {
+            List<models.Table> tables = GlobalAccess.globalAccess.GetTables();
+            tableControls = new List<TableControl>();
+
+            foreach (var i in tables)
+            {
+                Debug.WriteLine($"Processing Table: {i.tableId}");
+
+                if (i.tableStatus == 1)
+                {
+                    var tab = await GlobalAccess.globalAccess.dbManager.GetOpenTabByTableId(i.tableId).ConfigureAwait(false);
+                    tab.items.Add(new Item("Apple"));
+                    tab.items.Add(new Item("Bread"));
+                    i.SetCustomerTab(tab);
+                }
+
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    TableControl tableControl = new TableControl(i);
+                    tableControl.MouseLeftButtonDown += TableControl_LeftMouseDown;
+                    tableControls.Add(tableControl);
+
+                    // Add the table control to the homepage
+                    Debug.WriteLine($"Adding Table: {i.tableId}");
+                    this.TableGrid.Children.Add(tableControl);
+                    Grid.SetColumn(tableControl, i.columnID);
+                    Grid.SetRow(tableControl, i.rowID);
+                });
+            }
+
+            tables = null;
             return Task.CompletedTask;
         }
 

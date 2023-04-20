@@ -20,7 +20,7 @@ namespace ProServ
       
         protected override void OnStartup(StartupEventArgs e)
         {
-            
+            Debug.WriteLine("OnStartup");
 
             GlobalAccess.CreateGlobalAccess();
 
