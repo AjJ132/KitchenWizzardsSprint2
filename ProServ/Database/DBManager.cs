@@ -43,6 +43,7 @@ namespace ProServ.Database
                 await _connection.CreateTableAsync<CustomerTab>();
                 await _connection.CreateTableAsync<Item>();
                 await _connection.CreateTableAsync<ItemCategory>();
+                await _connection.CreateTableAsync<ForeignItem>();
                 
 
 
@@ -531,6 +532,75 @@ namespace ProServ.Database
                 return false;
             }
         }
+
+        //ForeginItems
+
+        //this is in charge of inserting an item into the customer tab and writing that record to a
+        //datatbase. This is a foreign key relationship
+
+        public async Task<List<ForeignItem>> GetForeignItems()
+        {
+            return await this._connection.Table<ForeignItem>().ToListAsync();
+        }
+
+        public async Task <List<ForeignItem>> GetForeignItemByTabId(int tabId)
+        {
+            return await this._connection.Table<ForeignItem>().Where(n => n.customerTabId == tabId).ToListAsync();
+        }
+
+        public async Task<List<ForeignItem>> GetForeignItemByTabAndItemId(int tabId, int itemdId)
+        {
+            return await this._connection.Table<ForeignItem>().Where(n => n.customerTabId == tabId && n.itemId == itemdId).ToListAsync();
+        }
+
+        
+
+        public async Task<bool> InsertForeignItem(ForeignItem foreignItem)
+        {
+            try
+            {
+                await _connection.InsertAsync(foreignItem);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("There was an error in inserting the foreign item");
+                Debug.WriteLine(e);
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateForeignItem(ForeignItem foreignItem)
+        {
+            try
+            {
+                await _connection.UpdateAsync(foreignItem);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("There was an error in updating the foreign item");
+                Debug.WriteLine(e);
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteForeignItem(ForeignItem foreignItem)
+        {
+            try
+            {
+                await _connection.DeleteAsync(foreignItem);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("There was an error in deleting the foreign item");
+                Debug.WriteLine(e);
+                return false;
+            }
+        }
+
+
 
     }
 }

@@ -36,8 +36,7 @@ namespace ProServ.models
         public int columnID { get; set; }
 
         [Ignore]
-        public CustomerTab currentTab { get; private set; }
-
+        public CustomerTab currentTab { get; set; }
         public Table()
         {
 

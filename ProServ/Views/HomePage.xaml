@@ -35,29 +35,67 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*" />
-                <ColumnDefinition Width="0.5*" />
             </Grid.ColumnDefinitions>
 
-            <Label FontSize="60" HorizontalContentAlignment="Left"
-                   Grid.ColumnSpan="2"
-                   Grid.Column="0">
-                <TextBlock >
+            <StackPanel Grid.ColumnSpan="2"
+                        Orientation="Vertical">
+                <Label FontSize="60" HorizontalContentAlignment="Left"
+                   
+                   >
+                    <TextBlock >
                    Selected Table: 
-                   <Run Text="{Binding selectedCustomerTab.tableId}" />  
-                </TextBlock>
-            </Label>
+                   <Run Text="{Binding selectedCustomerTab.tableId}" />
+                    </TextBlock>
+                </Label>
+                <Label FontSize="40" HorizontalContentAlignment="Left"
+                   >
+                    <TextBlock >
+                   Tab ID:  
+                   <Run Text="{Binding selectedCustomerTab.tabId}" />
+                    </TextBlock>
+                </Label>
+            </StackPanel>
 
-            
+
+            <ListBox ItemsSource="{Binding selectedCustomerTab.items}" 
+                     Grid.Row="1"
+                     Background="#454545"
+                     HorizontalAlignment="Stretch"
+                     Width="Auto">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            
+                            <Label FontSize="30" HorizontalContentAlignment="Center">
+                                <TextBlock >
+                                    <Run Text="{Binding itemName}" /> 
+                                </TextBlock>
+                            </Label>
+                            <Label FontSize="30" HorizontalContentAlignment="Center">
+                                <TextBlock >
+                                    <Run Text="{Binding itemPrice}" />
+                                </TextBlock>
+                            </Label>
+                            <StackPanel.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Delete" Click="MenuItem_Delete_Click" />
+                                </ContextMenu>
+                            </StackPanel.ContextMenu>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
 
-         <Grid Grid.Row="2"
+            <Grid Grid.Row="2"
                Grid.ColumnSpan="2">
+               
                 <Button 
                     Content="Check Out"
                     FontSize="64"
                     Width="300"
                     Height="150"
-                    Click="TestButton_Click"/>
+                    Click="CheckOutButton_Click"/>
          </Grid>
         </Grid>
         <Grid Grid.Column="1"

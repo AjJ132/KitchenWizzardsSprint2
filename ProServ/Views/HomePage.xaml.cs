@@ -124,7 +124,10 @@ namespace ProServ.Views
             else
             {
                 //Show logic to give option to create new tab
-
+                if(this.selectedCustomerTab != null)
+                {
+                    this.selectedCustomerTab = null;
+                }
             }
 
         }
@@ -148,14 +151,44 @@ namespace ProServ.Views
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void TestButton_Click(object sender, RoutedEventArgs e)
+        private async void CheckOutButton_Click(object sender, RoutedEventArgs e)
         {
-            var f = this.selectedCustomerTab;
-            var k = this.selectedTable.table;
+            var tab = this.selectedCustomerTab;
+            if(tab != null) {
+                try
+                {
+                    tab.tabClosed = true;
+                    tab.dateTimeClosed = DateTime.Now.ToString();              
+
+                    await GlobalAccess.globalAccess.dbManager.UpdateCustomerTab(tab);
+                    this.selectedCustomerTab = null;
 
 
+                    //Update table to dirty. Update database as well
+                    var table = this.selectedTable.table;
+                    table.currentTab = null;
+                    table.tableStatus = 2;
 
-            string s = "";
+                    await GlobalAccess.globalAccess.dbManager.UpdateTable(table);
+
+                    this.selectedTable = null;
+                    
+                }
+                catch(Exception ex)
+                {
+                    Debug.WriteLine("Exception When closing Tab: " + ex);
+                }
+            }
+        }
+
+        private void MenuItem_Delete_Click(object sender, RoutedEventArgs e)
+        {
+            //logic to remove item from customer tab
+            var item = sender as Item;
+            if(item != null)
+            {
+                this.selectedCustomerTab.RemoveItemById(item.itemId);
+            }
         }
     }
 

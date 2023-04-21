@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Transactions;
+using System.Windows.Controls.Primitives;
 using SQLite;
 
 namespace ProServ.models
@@ -13,12 +15,14 @@ namespace ProServ.models
 
         public bool tabClosed { get; set; }
 
-        public DateTime dateOpened { get; set; }
+        //String is beacuase SQLite does not have a DateTime type
+        public String dateOpened { get; set; }
 
-        public DateTime dateTimeClosed { get; set; }
+        public String dateTimeClosed { get; set; }
 
         [Ignore]
         public List<ProServ.models.Item> items { get; set; }
+
         public double tabTotal { get; set; }
 
         public int tableId { get; set; }
@@ -38,7 +42,7 @@ namespace ProServ.models
             this.tableId = tableId;
             this.customerId = 0;
             this.tabClosed = false;
-            this.dateOpened = DateTime.Now;
+            this.dateOpened = DateTime.Now.ToString();
         }
 
       
@@ -52,6 +56,28 @@ namespace ProServ.models
             }
 
             return tabTotal;
+        }
+
+        public async void RemoveItemById(int itemID)
+        {
+            Item itemToRemove = this.items.Where(n => n.itemId == itemID).FirstOrDefault();
+            if (itemToRemove != null)
+            {
+                this.items.Remove(itemToRemove);
+
+                //Update customer tab in database
+                await GlobalAccess.globalAccess.dbManager.UpdateCustomerTab(this);
+
+                //Update foreign item tables
+                List<ForeignItem> itemsUnderTab = await GlobalAccess.globalAccess.dbManager.GetForeignItemByTabAndItemId(this.tabId, itemID);
+
+                await GlobalAccess.globalAccess.dbManager.DeleteForeignItem(itemsUnderTab[0]);
+
+
+                return;
+            }
+            else { return; }
+            
         }
     }
 }
