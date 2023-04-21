@@ -89,8 +89,6 @@ namespace ProServ.Views
 
         private void Mark_As_Dirty_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Mark as dirty");
-
             this.table.tableStatus = 2;
 
             GlobalAccess.globalAccess.dbManager.UpdateTable(this.table);

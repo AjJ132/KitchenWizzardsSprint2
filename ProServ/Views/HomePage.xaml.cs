@@ -64,54 +64,6 @@ namespace ProServ.Views
             
         }
 
-        /*
-        //tables are imported and each table control is assigned a table
-        public async Task<Task> SetTableControls()
-        {
-            List<models.Table> tables = GlobalAccess.globalAccess.GetTables();
-            tableControls = new List<TableControl>();
-            
-            foreach(var i  in tables)
-            {
-                Debug.WriteLine($"Processing Table: {i.tableId}");
-
-                if (i.tableStatus == 1)
-                {
-                    var tab = await GlobalAccess.globalAccess.dbManager.GetOpenTabByTableId(i.tableId).ConfigureAwait(false);
-                    tab.items.Add(new Item("Apple"));
-                    tab.items.Add(new Item("Bread"));
-                    i.SetCustomerTab(tab);
-                } 
-
-                TableControl tableControl = new TableControl(i);
-                tableControl.MouseLeftButtonDown += TableControl_LeftMouseDown;
-                tableControls.Add(tableControl);
-
-                
-            }
-
-            tables = null;
-            return Task.CompletedTask;
-        }
-
-        //table controls are added to the homepage
-        public Task AddTableControls()
-        {
-            var grid = this.TableGrid;
-
-            foreach(var i in tableControls)
-            {
-                Debug.WriteLine($"Adding Table: {i.table.tableId}");
-
-                this.TableGrid.Children.Add(i);
-                Grid.SetColumn(i, i.table.columnID);
-                Grid.SetRow(i, i.table.rowID);
-            }
-            
-            return Task.CompletedTask;
-        }
-
-        */
 
         public async Task<Task> InitializeAndAddTableControls()
         {
@@ -120,7 +72,7 @@ namespace ProServ.Views
 
             foreach (var i in tables)
             {
-                Debug.WriteLine($"Processing Table: {i.tableId}");
+               
 
                 if (i.tableStatus == 1)
                 {
@@ -137,7 +89,6 @@ namespace ProServ.Views
                     tableControls.Add(tableControl);
 
                     // Add the table control to the homepage
-                    Debug.WriteLine($"Adding Table: {i.tableId}");
                     this.TableGrid.Children.Add(tableControl);
                     Grid.SetColumn(tableControl, i.columnID);
                     Grid.SetRow(tableControl, i.rowID);
@@ -173,25 +124,21 @@ namespace ProServ.Views
             else
             {
                 //Show logic to give option to create new tab
+
             }
 
-            Debug.WriteLine("Selected Table: " + this.selectedTable.table.tableId);
         }
 
-        private async void ShowCustomerTab()
+        private void ShowCustomerTab()
         {
-            this.selectedCustomerTab = selectedTable.table.currentTab as CustomerTab;
+            this.selectedCustomerTab = selectedTable.table.currentTab;
             string s = "";
         }
 
-        private async void AllowCreateCustomerTab()
+        private void AllowCreateCustomerTab()
         {
             Debug.WriteLine("You can create a tab");
         }
-
-
-
-
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -201,8 +148,15 @@ namespace ProServ.Views
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private void TestButton_Click(object sender, RoutedEventArgs e)
+        {
+            var f = this.selectedCustomerTab;
+            var k = this.selectedTable.table;
 
 
+
+            string s = "";
+        }
     }
 
 
