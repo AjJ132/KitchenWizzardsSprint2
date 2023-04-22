@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\AJ\Documents\C#\Sprint\ProServ\App.xaml
-4-2086088140
+5-279096605
 
-20359169893
+211249654307
 1991231721590
-MainWindow.xaml;Views\HomePage.xaml;Views\Login.xaml;Views\TableControl.xaml;
+MainWindow.xaml;Views\HomePage.xaml;Views\Login.xaml;Views\MenuItemControl.XAML;Views\TableControl.xaml;
 
 True
 

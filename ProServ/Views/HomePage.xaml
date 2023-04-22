@@ -120,16 +120,15 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
         </Grid>
+        
+        <!--Mentu Section-->
         <Grid Grid.Column="1"
               Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.2*" />
-                <ColumnDefinition Width="0.8*" />
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.9*" />
             </Grid.ColumnDefinitions>
-            <Frame Grid.Column="0" 
-                   Background="Red"/>
-            <Frame Grid.Column="1" 
-                   Background="White"/>
+            
         </Grid>
     </Grid>
 </Page>
