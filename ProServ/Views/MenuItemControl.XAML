@@ -5,13 +5,85 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProServ.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="200">
-    <Grid Background="White">
-        <Image Height="125"  Width="125" 
-               x:Name="ItemImage"/>
-        <Label Content="{}" HorizontalAlignment="Center"  VerticalAlignment="Bottom"
-               FontSize="32"
-               />
+             d:DesignHeight="400" d:DesignWidth="1000">
+    <TabControl>
+        <TabItem Header="Apetizers">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding Appetizers}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Image Source="{Binding imagePath}" />
+                                    <TextBlock Text="{Binding itemName}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
 
-    </Grid>
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="Salads">
+
+        </TabItem>
+        <TabItem Header="Entrees">
+
+        </TabItem>
+        <TabItem Header="Sides">
+
+        </TabItem>
+        <TabItem Header="Sandwhiches">
+
+        </TabItem>
+        <TabItem Header="Wraps">
+
+        </TabItem>
+        <TabItem Header="Burgers">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto"
+              VerticalScrollBarVisibility="Disabled">
+                <ItemsControl ItemsSource="{Binding Burgers}"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Black"
+                        BorderThickness="1"
+                        Margin="5"
+                        Padding="5"
+                                    CornerRadius="20">
+                               
+                                <StackPanel Width="400">
+                                    <Image Width="Auto"
+                                           Height="275">
+                                        <Image.Source>
+                                            <BitmapImage UriSource="{Binding imagePath}" />
+                                        </Image.Source>
+                                    </Image>
+                                    <TextBlock Text="{Binding itemName}" 
+                                   FontSize="40"
+                                   HorizontalAlignment="Center"/>
+
+                                    <StackPanel.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Add to tab" />
+                                        </ContextMenu>
+                                    </StackPanel.ContextMenu>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </ScrollViewer>
+
+        </TabItem>
+        <TabItem Header="Beverages">
+
+        </TabItem>
+    </TabControl>
 </UserControl>

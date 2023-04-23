@@ -8,11 +8,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\Bacon Cheeseburger.jpg" />
+    <None Remove="Images\J Burger.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Converters\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Bacon Cheeseburger.jpg" />
+    <Resource Include="Images\J Burger.jpg" />
   </ItemGroup>
 
 </Project>

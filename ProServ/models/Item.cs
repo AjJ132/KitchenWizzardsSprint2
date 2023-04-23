@@ -10,25 +10,39 @@ namespace ProServ.models
 
         public string itemName { get; set; }
 
-        public int categoryId { get; set; }
+        public string categoryName { get; set; }
 
         public double itemPrice { get; set; }
 
+        [Ignore]
+        public string imagePath { get; set; }
+
+        
         public Item()
         {
+            this.imagePath = "/Images/" + this.itemName + ".jpg";
         }
 
         public Item(string itemName)
         {
             this.itemName = itemName;
+
+            this.imagePath = "/Images/" + this.itemName + ".jpg";
         }
 
-        public Item(string itemName, int categoryId, double itemPrice)
+        public Item(string itemName, string category, double itemPrice)
         {
             this.itemName = itemName;
-            this.categoryId = categoryId;
+            this.categoryName = category;
             this.itemPrice = itemPrice;
 
+            this.imagePath = "/Images/" + this.itemName + ".jpg";
+
+        }
+
+        public void InitImagePath()
+        {
+            this.imagePath = "/Images/" + this.itemName + ".jpg";
         }
     }
 }

@@ -548,9 +548,9 @@ namespace ProServ.Database
             return await this._connection.Table<ForeignItem>().Where(n => n.customerTabId == tabId).ToListAsync();
         }
 
-        public async Task<List<ForeignItem>> GetForeignItemByTabAndItemId(int tabId, int itemdId)
+        public async Task<ForeignItem> GetForeignItemByTabAndItemId(int tabId, int itemdId)
         {
-            return await this._connection.Table<ForeignItem>().Where(n => n.customerTabId == tabId && n.itemId == itemdId).ToListAsync();
+            return await this._connection.Table<ForeignItem>().Where(n => n.customerTabId == tabId).Where(p => p.itemId == itemdId).FirstOrDefaultAsync();
         }
 
         
@@ -589,7 +589,7 @@ namespace ProServ.Database
         {
             try
             {
-                await _connection.DeleteAsync(foreignItem);
+                var variable = await _connection.DeleteAsync(foreignItem);
                 return true;
             }
             catch (Exception e)

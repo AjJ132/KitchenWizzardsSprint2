@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -47,6 +48,19 @@ namespace ProServ.Views
             }
         }
 
+        
+
+
+
+        public List<Item> Appetizers { get; set; }
+        public List<Item> Salads { get; set; }
+        public List<Item> Entrees { get; set; }
+        public List<Item> Sides { get; set; }
+        public List<Item> Sandwhiches { get; set; }
+        public List<Item> Wraps { get; set; }
+        public List<Item> Burgers { get; set; }
+        public List<Item> Beverages { get; set; }
+
 
 
         public HomePage()
@@ -58,6 +72,9 @@ namespace ProServ.Views
             //AddTableControls();
 
             _ = InitializeAndAddTableControls();
+
+            _ = InititalizeFoodLists();
+
 
             DataContext = this;
 
@@ -77,8 +94,14 @@ namespace ProServ.Views
                 if (i.tableStatus == 1)
                 {
                     var tab = await GlobalAccess.globalAccess.dbManager.GetOpenTabByTableId(i.tableId).ConfigureAwait(false);
-                    tab.items.Add(new Item("Apple"));
-                    tab.items.Add(new Item("Bread"));
+                    var foreignItems = await GlobalAccess.globalAccess.dbManager.GetForeignItemByTabId(tab.tabId).ConfigureAwait(false);
+
+                    foreach(var n in foreignItems)
+                    {
+                        Item item = await GlobalAccess.globalAccess.dbManager.GetItemByID(n.itemId);
+                        tab.items.Add(item);
+                    }
+                    
                     i.SetCustomerTab(tab);
                 }
 
@@ -138,11 +161,7 @@ namespace ProServ.Views
             string s = "";
         }
 
-        private void AllowCreateCustomerTab()
-        {
-            Debug.WriteLine("You can create a tab");
-        }
-
+        
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -183,13 +202,81 @@ namespace ProServ.Views
 
         private void MenuItem_Delete_Click(object sender, RoutedEventArgs e)
         {
-            //logic to remove item from customer tab
-            var item = sender as Item;
-            if(item != null)
+            var menuItem = sender as MenuItem;
+            var contextMenu = menuItem.Parent as ContextMenu;
+            var stackPanel = contextMenu.PlacementTarget as StackPanel;
+            var listBoxItem = FindParent<ListBoxItem>(stackPanel);
+
+            // Get the data context (Item) of the ListBoxItem
+            var item = listBoxItem.DataContext as Item;
+            if (item != null)
             {
-                this.selectedCustomerTab.RemoveItemById(item.itemId);
+                this.selectedCustomerTab.RemoveItemById(item);
             }
         }
+
+        public static T FindParent<T>(DependencyObject child) where T : DependencyObject
+        {
+            DependencyObject parent = VisualTreeHelper.GetParent(child);
+
+            if (parent == null) return null;
+
+            T parentAsT = parent as T;
+            return parentAsT ?? FindParent<T>(parent);
+        }
+
+        public async Task<Task> InititalizeFoodLists()
+        {
+            var foodItems = await GlobalAccess.globalAccess.dbManager.GetItems();
+
+            foreach (var i in foodItems)
+            {
+                i.InitImagePath();
+            }
+
+            //get all food items in list and add them to their respective food groups
+
+            this.Appetizers = foodItems.Where(n => n.categoryName.Equals("Appetizers")).ToList();
+            this.Salads = foodItems.Where(n => n.categoryName.Equals("Salads")).ToList();
+            this.Entrees = foodItems.Where(n => n.categoryName.Equals("Entrees")).ToList();
+            this.Sides = foodItems.Where(n => n.categoryName.Equals("Sides")).ToList();
+            this.Sandwhiches = foodItems.Where(n => n.categoryName.Equals("Sandwhiches")).ToList();
+            this.Wraps = foodItems.Where(n => n.categoryName.Equals("Wraps")).ToList();
+            this.Burgers = foodItems.Where(n => n.categoryName.Equals("Burgers")).ToList();
+            this.Beverages = foodItems.Where(n => n.categoryName.Equals("Beverages")).ToList();
+
+
+
+            return Task.CompletedTask;
+        }
+
+        private async void MenuItem_AddToTab(object sender, RoutedEventArgs e)
+        {
+            if(this.selectedTable != null && this.selectedCustomerTab != null)
+            {
+                //Add item to customer tab
+              
+                var clickedItem = (((sender as MenuItem).Parent as ContextMenu).PlacementTarget as StackPanel).DataContext as Item;
+
+
+                //Update database
+                Application.Current.Dispatcher.Invoke(() => this.selectedCustomerTab.items.Add(clickedItem));
+
+
+                await GlobalAccess.globalAccess.dbManager.InsertForeignItem(new ForeignItem(clickedItem.itemId, this.selectedCustomerTab.tabId));
+
+                ShowCustomerTab();
+
+            }
+        }
+
+
+
+
+
+
+
+
     }
 
 

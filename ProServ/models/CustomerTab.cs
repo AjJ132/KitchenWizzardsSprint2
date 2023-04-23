@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Transactions;
 using System.Windows.Controls.Primitives;
@@ -7,7 +9,7 @@ using SQLite;
 
 namespace ProServ.models
 {
-    public class CustomerTab
+    public class CustomerTab : INotifyPropertyChanged
     {
         [PrimaryKey, AutoIncrement]
         public int tabId { get; set; } = 1001;
@@ -20,8 +22,22 @@ namespace ProServ.models
 
         public String dateTimeClosed { get; set; }
 
+        
+        private ObservableCollection<Item> _items;
         [Ignore]
-        public List<ProServ.models.Item> items { get; set; }
+        public ObservableCollection<Item> items
+        {
+            get { return _items; }
+            set
+            {
+                if (_items != value)
+                {
+                    _items = value;
+                    OnPropertyChanged(nameof(items));
+                }
+            }
+        }
+
 
         public double tabTotal { get; set; }
 
@@ -32,12 +48,12 @@ namespace ProServ.models
 
         public CustomerTab()
         {
-            this.items = new List<ProServ.models.Item>();
+            this.items = new ObservableCollection<Item>();
             this.tabTotal = 0;
         }
         public CustomerTab(int tableId)
         {
-            this.items = new List<ProServ.models.Item>();
+            this.items = new ObservableCollection<Item>();
             this.tabTotal = 0;
             this.tableId = tableId;
             this.customerId = 0;
@@ -45,7 +61,14 @@ namespace ProServ.models
             this.dateOpened = DateTime.Now.ToString();
         }
 
-      
+
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public double GetTabTotal()
         {
@@ -58,20 +81,19 @@ namespace ProServ.models
             return tabTotal;
         }
 
-        public async void RemoveItemById(int itemID)
+        public async void RemoveItemById(Item itemToRemove)
         {
-            Item itemToRemove = this.items.Where(n => n.itemId == itemID).FirstOrDefault();
             if (itemToRemove != null)
             {
                 this.items.Remove(itemToRemove);
 
                 //Update customer tab in database
-                await GlobalAccess.globalAccess.dbManager.UpdateCustomerTab(this);
+                ForeignItem foreignItem = await GlobalAccess.globalAccess.dbManager.GetForeignItemByTabAndItemId(tabId, itemToRemove.itemId);
 
                 //Update foreign item tables
-                List<ForeignItem> itemsUnderTab = await GlobalAccess.globalAccess.dbManager.GetForeignItemByTabAndItemId(this.tabId, itemID);
+                await GlobalAccess.globalAccess.dbManager.DeleteForeignItem(foreignItem);
 
-                await GlobalAccess.globalAccess.dbManager.DeleteForeignItem(itemsUnderTab[0]);
+                this.items.Remove(itemToRemove);
 
 
                 return;

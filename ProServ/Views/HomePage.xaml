@@ -98,6 +98,8 @@
                     Click="CheckOutButton_Click"/>
          </Grid>
         </Grid>
+        
+        <!-- Tables -->
         <Grid Grid.Column="1"
               Grid.Row="0"
               ShowGridLines="True"
@@ -121,14 +123,92 @@
             </Grid.ColumnDefinitions>
         </Grid>
         
-        <!--Mentu Section-->
+        <!--Menu Section-->
         <Grid Grid.Column="1"
-              Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.1*" />
-                <ColumnDefinition Width="0.9*" />
-            </Grid.ColumnDefinitions>
-            
+              Grid.Row="1"
+              x:Name="MenuGrid">
+            <TabControl>
+                <TabItem Header="Apetizers">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <ItemsControl ItemsSource="{Binding Appetizers}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <Image Source="{Binding imagePath}" />
+                                            <TextBlock Text="{Binding itemName}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Salads">
+
+                </TabItem>
+                <TabItem Header="Entrees">
+
+                </TabItem>
+                <TabItem Header="Sides">
+
+                </TabItem>
+                <TabItem Header="Sandwhiches">
+
+                </TabItem>
+                <TabItem Header="Wraps">
+
+                </TabItem>
+                <TabItem Header="Burgers">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+              VerticalScrollBarVisibility="Disabled">
+                        <ItemsControl ItemsSource="{Binding Burgers}"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="Black"
+                        BorderThickness="1"
+                        Margin="5"
+                        Padding="5"
+                                    CornerRadius="20">
+
+                                        <StackPanel Width="400">
+                                            <Image Width="Auto"
+                                           Height="275">
+                                                <Image.Source>
+                                                    <BitmapImage UriSource="{Binding imagePath}" />
+                                                </Image.Source>
+                                            </Image>
+                                            <TextBlock Text="{Binding itemName}" 
+                                   FontSize="40"
+                                   HorizontalAlignment="Center"/>
+
+                                            <StackPanel.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="Add to tab" 
+                                                      Click="MenuItem_AddToTab"/>
+                                                </ContextMenu>
+                                            </StackPanel.ContextMenu>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Vertical" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </ScrollViewer>
+
+                </TabItem>
+                <TabItem Header="Beverages">
+
+                </TabItem>
+            </TabControl>
+
         </Grid>
     </Grid>
 </Page>
