@@ -56,7 +56,7 @@ namespace ProServ.Views
         public List<Item> Salads { get; set; }
         public List<Item> Entrees { get; set; }
         public List<Item> Sides { get; set; }
-        public List<Item> Sandwhiches { get; set; }
+        public List<Item> Sandwiches { get; set; }
         public List<Item> Wraps { get; set; }
         public List<Item> Burgers { get; set; }
         public List<Item> Beverages { get; set; }
@@ -240,7 +240,7 @@ namespace ProServ.Views
             this.Salads = foodItems.Where(n => n.categoryName.Equals("Salads")).ToList();
             this.Entrees = foodItems.Where(n => n.categoryName.Equals("Entrees")).ToList();
             this.Sides = foodItems.Where(n => n.categoryName.Equals("Sides")).ToList();
-            this.Sandwhiches = foodItems.Where(n => n.categoryName.Equals("Sandwhiches")).ToList();
+            this.Sandwiches = foodItems.Where(n => n.categoryName.Equals("Sandwiches")).ToList();
             this.Wraps = foodItems.Where(n => n.categoryName.Equals("Wraps")).ToList();
             this.Burgers = foodItems.Where(n => n.categoryName.Equals("Burgers")).ToList();
             this.Beverages = foodItems.Where(n => n.categoryName.Equals("Beverages")).ToList();
@@ -270,13 +270,23 @@ namespace ProServ.Views
             }
         }
 
+        private void StackPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            StackPanel stackPanel = sender as StackPanel;
+            if (stackPanel != null)
+            {
+                ContextMenu contextMenu = stackPanel.ContextMenu;
+                if (contextMenu != null)
+                {
+                    // Open the context menu manually
+                    contextMenu.PlacementTarget = stackPanel;
+                    contextMenu.IsOpen = true;
 
-
-
-
-
-
-
+                    // Mark the event as handled to prevent it from being processed further
+                    e.Handled = true;
+                }
+            }
+        }
     }
 
 

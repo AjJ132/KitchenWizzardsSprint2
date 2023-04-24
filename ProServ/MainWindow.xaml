@@ -14,7 +14,7 @@
 
 
 
-	<DockPanel>
+	<DockPanel Background="#454545">
 		<ToolBar DockPanel.Dock="Top">
 			<Button Content="File"/>
 			<Button Content="Edit"/>

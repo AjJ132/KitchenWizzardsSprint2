@@ -4,13 +4,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ProServ.Views"
-      Title="Login">
+      Title="Login"
+      Height="1080"
+      Width="1920">
 
     <Grid Background="#454545">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height=".3*"/>
+            <RowDefinition Height=".7*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -18,18 +19,46 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="1" Content="ProServ" VerticalAlignment="Top"  FontSize="72" FontFamily="Arial Black" HorizontalAlignment="Center"/>
+        <Label Grid.Row="0" Grid.Column="1" Content="ProServ" VerticalAlignment="Top"  FontSize="128" FontFamily="Arial Black" HorizontalAlignment="Center" Margin="0,79,0,0" Grid.RowSpan="2"/>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid Grid.Row="1"
+              Grid.Column="0" Margin="112,96,112,96">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBox Grid.Row="0" Text="{Binding InputNumber, UpdateSourceTrigger=PropertyChanged}" Margin="5" Padding="5" FontSize="16"/>
+
+            <UniformGrid Grid.Row="1" Rows="4" Columns="3" Margin="5">
+                <Button Content="1" FontSize="20" Click="NumberButtonClick"/>
+                <Button Content="2" FontSize="20" Click="NumberButtonClick"/>
+                <Button Content="3" FontSize="20" Click="NumberButtonClick"/>
+                <Button Content="4" FontSize="20" Click="NumberButtonClick"/>
+                <Button Content="5" FontSize="20" Click="NumberButtonClick"/>
+                <Button Content="6" FontSize="20" Click="NumberButtonClick"/>
+                <Button Content="7" FontSize="20" Click="NumberButtonClick"/>
+                <Button Content="8" FontSize="20" Click="NumberButtonClick"/>
+                <Button Content="9" FontSize="20" Click="NumberButtonClick"/>
+                <Button Content="&#x232B;" FontSize="20" Click="BackspaceButton_Click_1"/>
+                <Button Content="0" FontSize="20" Click="NumberButtonClick"/>
+                <Button Content="✓" FontSize="20" Background="Green" Click="LoginViaPinBtn_Click"/>
+
+            </UniformGrid>
+        </Grid>
+
+        <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Width="456" Margin="98,0,0,0" >
             <Label Content="Login" FontSize="48" FontFamily="Arial Black" HorizontalAlignment="Center"/>
             <Label Content="Username" FontSize="32" HorizontalAlignment="Center"/>
             <TextBox x:Name="Username_tb" TextWrapping="Wrap" Width="225" Height="22" HorizontalAlignment="Center"/>
             <Label Content="Password" FontSize="32" HorizontalAlignment="Center"/>
             <TextBox x:Name="Password_tb" TextWrapping="Wrap" Width="224" Height="22" HorizontalAlignment="Center"/>
             <Label x:Name="LoginMessage_lb" FontSize="22" HorizontalAlignment="Center"/>
-            <Button x:Name="LoginBtn" Content="Login" FontSize="48" HorizontalAlignment="Center" Background="Green" Click="LoginBtn_Click" Height="74" Width="178"/>
-            <Button Content="Bypass" Click="Button_Click" Height="59" Width="166" HorizontalAlignment="Center"/>
+            <Button x:Name="LoginBtn" Content="Login" FontSize="48" Background="Green" Click="LoginBtn_Click" Height="74" Width="178"/>
         </StackPanel>
+
+
+        <Button Content="Bypass" Click="Button_Click" Grid.Column="1" Margin="200,893,200,128" Grid.Row="1"/>
     </Grid>
 
 

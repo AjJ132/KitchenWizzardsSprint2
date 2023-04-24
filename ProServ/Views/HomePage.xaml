@@ -3,16 +3,14 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-	xmlns:local="clr-namespace:ProServ.Views" 
-    xmlns:models="clr-namespace:ProServ.models" 
+	xmlns:local="clr-namespace:ProServ.Views"
+	xmlns:models="clr-namespace:ProServ.models" 
       Title="HomePage"
        mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920">
     <Page.Resources>
         <local:ItemsToStringConverter x:Key="ItemsToStringConverter" />
-       
     </Page.Resources>
-    
     <Grid Background="#454545" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.2*" />
@@ -22,7 +20,6 @@
             <RowDefinition Height="0.7*" />
             <RowDefinition Height="0.3*" />
         </Grid.RowDefinitions>
-        
         <!-- Customer Tab -->
         <Grid Grid.Column="0"
               Grid.Row="0"
@@ -36,27 +33,28 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*" />
             </Grid.ColumnDefinitions>
-
+            
+            
             <StackPanel Grid.ColumnSpan="2"
-                        Orientation="Vertical">
-                <Label FontSize="60" HorizontalContentAlignment="Left"
-                   
-                   >
+                        Orientation="Vertical"
+                        Grid.Row="0">
+                <Button Content="Log-Out" 
+                        Height="90"
+                        Width="300"
+                        FontSize="60"/>
+                <Label FontSize="60" HorizontalContentAlignment="Left">
                     <TextBlock >
-                   Selected Table: 
-                   <Run Text="{Binding selectedCustomerTab.tableId}" />
+                        Selected Table: 
+						<Run Text="{Binding selectedCustomerTab.tableId}" />
                     </TextBlock>
                 </Label>
-                <Label FontSize="40" HorizontalContentAlignment="Left"
-                   >
+                <Label FontSize="40" HorizontalContentAlignment="Left">
                     <TextBlock >
-                   Tab ID:  
-                   <Run Text="{Binding selectedCustomerTab.tabId}" />
+                        Tab ID:  
+						<Run Text="{Binding selectedCustomerTab.tabId}" />
                     </TextBlock>
                 </Label>
             </StackPanel>
-
-
             <ListBox ItemsSource="{Binding selectedCustomerTab.items}" 
                      Grid.Row="1"
                      Background="#454545"
@@ -64,16 +62,16 @@
                      Width="Auto">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            
+                        <StackPanel Orientation="Horizontal"
+                                    >
                             <Label FontSize="30" HorizontalContentAlignment="Center">
                                 <TextBlock >
-                                    <Run Text="{Binding itemName}" /> 
+									<Run Text="{Binding itemName}" />
                                 </TextBlock>
                             </Label>
-                            <Label FontSize="30" HorizontalContentAlignment="Center">
+                            <Label FontSize="30">
                                 <TextBlock >
-                                    <Run Text="{Binding itemPrice}" />
+									<Run Text="{Binding itemPrice}" />
                                 </TextBlock>
                             </Label>
                             <StackPanel.ContextMenu>
@@ -85,20 +83,16 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-
-
             <Grid Grid.Row="2"
                Grid.ColumnSpan="2">
-               
                 <Button 
                     Content="Check Out"
                     FontSize="64"
                     Width="300"
                     Height="150"
                     Click="CheckOutButton_Click"/>
-         </Grid>
+            </Grid>
         </Grid>
-        
         <!-- Tables -->
         <Grid Grid.Column="1"
               Grid.Row="0"
@@ -122,59 +116,26 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
         </Grid>
-        
         <!--Menu Section-->
         <Grid Grid.Column="1"
               Grid.Row="1"
               x:Name="MenuGrid">
-            <TabControl>
-                <TabItem Header="Apetizers">
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto">
-                        <ScrollViewer VerticalScrollBarVisibility="Auto">
-                            <ItemsControl ItemsSource="{Binding Appetizers}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel>
-                                            <Image Source="{Binding imagePath}" />
-                                            <TextBlock Text="{Binding itemName}" />
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </ScrollViewer>
-
-                    </ScrollViewer>
-                </TabItem>
-                <TabItem Header="Salads">
-
-                </TabItem>
-                <TabItem Header="Entrees">
-
-                </TabItem>
-                <TabItem Header="Sides">
-
-                </TabItem>
-                <TabItem Header="Sandwhiches">
-
-                </TabItem>
-                <TabItem Header="Wraps">
-
-                </TabItem>
-                <TabItem Header="Burgers">
+            <TabControl FontSize="24">
+                <TabItem Header="Appetizers">
                     <ScrollViewer HorizontalScrollBarVisibility="Auto"
-              VerticalScrollBarVisibility="Disabled">
-                        <ItemsControl ItemsSource="{Binding Burgers}"
-                  HorizontalAlignment="Left"
-                  VerticalAlignment="Center">
+                                    VerticalScrollBarVisibility="Disabled">
+                        <ItemsControl ItemsSource="{Binding Appetizers}"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Center">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Border BorderBrush="Black"
-                        BorderThickness="1"
-                        Margin="5"
-                        Padding="5"
+                                            BorderThickness="1"
+                                            Margin="5"
+                                            Padding="5"
                                     CornerRadius="20">
-
-                                        <StackPanel Width="400">
+                                        <StackPanel Width="400"
+                                                    PreviewMouseDown="StackPanel_MouseLeftButtonDown">
                                             <Image Width="Auto"
                                            Height="275">
                                                 <Image.Source>
@@ -184,7 +145,6 @@
                                             <TextBlock Text="{Binding itemName}" 
                                    FontSize="40"
                                    HorizontalAlignment="Center"/>
-
                                             <StackPanel.ContextMenu>
                                                 <ContextMenu>
                                                     <MenuItem Header="Add to tab" 
@@ -202,13 +162,261 @@
                             </ItemsControl.ItemsPanel>
                         </ItemsControl>
                     </ScrollViewer>
-
                 </TabItem>
-                <TabItem Header="Beverages">
-
+                <TabItem Header="Salads">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                    VerticalScrollBarVisibility="Disabled">
+                        <ItemsControl ItemsSource="{Binding Salads}"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Center">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="Black"
+                                            BorderThickness="1"
+                                            Margin="5"
+                                            Padding="5"
+                                    CornerRadius="20">
+                                        <StackPanel Width="400"
+                                                    PreviewMouseDown="StackPanel_MouseLeftButtonDown">
+                                            <Image Width="Auto"
+                                           Height="275">
+                                                <Image.Source>
+                                                    <BitmapImage UriSource="{Binding imagePath}" />
+                                                </Image.Source>
+                                            </Image>
+                                            <TextBlock Text="{Binding itemName}" 
+                                   FontSize="40"
+                                   HorizontalAlignment="Center"/>
+                                            <StackPanel.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="Add to tab" 
+                                                      Click="MenuItem_AddToTab"/>
+                                                </ContextMenu>
+                                            </StackPanel.ContextMenu>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Vertical" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </ScrollViewer>
                 </TabItem>
+                <TabItem Header="Entrees">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                    VerticalScrollBarVisibility="Disabled">
+                        <ItemsControl ItemsSource="{Binding Entrees}"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Center">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="Black"
+                                            BorderThickness="1"
+                                            Margin="5"
+                                            Padding="5"
+                                    CornerRadius="20">
+                                        <StackPanel Width="400"
+                                                    PreviewMouseDown="StackPanel_MouseLeftButtonDown">
+                                            <Image Width="Auto"
+                                           Height="275">
+                                                <Image.Source>
+                                                    <BitmapImage UriSource="{Binding imagePath}" />
+                                                </Image.Source>
+                                            </Image>
+                                            <TextBlock Text="{Binding itemName}" 
+                                   FontSize="40"
+                                   HorizontalAlignment="Center"/>
+                                            <StackPanel.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="Add to tab" 
+                                                      Click="MenuItem_AddToTab"/>
+                                                </ContextMenu>
+                                            </StackPanel.ContextMenu>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Vertical" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Sides">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                    VerticalScrollBarVisibility="Disabled">
+                        <ItemsControl ItemsSource="{Binding Sides}"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Center">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="Black"
+                                            BorderThickness="1"
+                                            Margin="5"
+                                            Padding="5"
+                                    CornerRadius="20">
+                                        <StackPanel Width="400"
+                                                    PreviewMouseDown="StackPanel_MouseLeftButtonDown">
+                                            <Image Width="Auto"
+                                           Height="275">
+                                                <Image.Source>
+                                                    <BitmapImage UriSource="{Binding imagePath}" />
+                                                </Image.Source>
+                                            </Image>
+                                            <TextBlock Text="{Binding itemName}" 
+                                   FontSize="40"
+                                   HorizontalAlignment="Center"/>
+                                            <StackPanel.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="Add to tab" 
+                                                      Click="MenuItem_AddToTab"/>
+                                                </ContextMenu>
+                                            </StackPanel.ContextMenu>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Vertical" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Sandwiches">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                    VerticalScrollBarVisibility="Disabled">
+                        <ItemsControl ItemsSource="{Binding Sandwiches}"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Center">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="Black"
+                                            BorderThickness="1"
+                                            Margin="5"
+                                            Padding="5"
+                                    CornerRadius="20">
+                                        <StackPanel Width="400"
+                                                    PreviewMouseDown="StackPanel_MouseLeftButtonDown">
+                                            <Image Width="Auto"
+                                           Height="275">
+                                                <Image.Source>
+                                                    <BitmapImage UriSource="{Binding imagePath}" />
+                                                </Image.Source>
+                                            </Image>
+                                            <TextBlock Text="{Binding itemName}" 
+                                   FontSize="40"
+                                   HorizontalAlignment="Center"/>
+                                            <StackPanel.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="Add to tab" 
+                                                      Click="MenuItem_AddToTab"/>
+                                                </ContextMenu>
+                                            </StackPanel.ContextMenu>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Vertical" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Wraps">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                    VerticalScrollBarVisibility="Disabled">
+                        <ItemsControl ItemsSource="{Binding Wraps}"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Center">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="Black"
+                                            BorderThickness="1"
+                                            Margin="5"
+                                            Padding="5"
+                                    CornerRadius="20">
+                                        <StackPanel Width="400"
+                                                    PreviewMouseDown="StackPanel_MouseLeftButtonDown">
+                                            <Image Width="Auto"
+                                           Height="275">
+                                                <Image.Source>
+                                                    <BitmapImage UriSource="{Binding imagePath}" />
+                                                </Image.Source>
+                                            </Image>
+                                            <TextBlock Text="{Binding itemName}" 
+                                   FontSize="40"
+                                   HorizontalAlignment="Center"/>
+                                            <StackPanel.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="Add to tab" 
+                                                      Click="MenuItem_AddToTab"/>
+                                                </ContextMenu>
+                                            </StackPanel.ContextMenu>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Vertical" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Burgers">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                    VerticalScrollBarVisibility="Disabled">
+                        <ItemsControl ItemsSource="{Binding Burgers}"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Center">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="Black"
+                                            BorderThickness="1"
+                                            Margin="5"
+                                            Padding="5"
+                                    CornerRadius="20">
+                                        <StackPanel Width="400"
+                                                    PreviewMouseDown="StackPanel_MouseLeftButtonDown">
+                                            <Image Width="Auto"
+                                           Height="275">
+                                                <Image.Source>
+                                                    <BitmapImage UriSource="{Binding imagePath}" />
+                                                </Image.Source>
+                                            </Image>
+                                            <TextBlock Text="{Binding itemName}" 
+                                   FontSize="40"
+                                   HorizontalAlignment="Center"/>
+                                            <StackPanel.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="Add to tab" 
+                                                      Click="MenuItem_AddToTab"/>
+                                                </ContextMenu>
+                                            </StackPanel.ContextMenu>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Vertical" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Beverages"></TabItem>
             </TabControl>
-
         </Grid>
     </Grid>
 </Page>

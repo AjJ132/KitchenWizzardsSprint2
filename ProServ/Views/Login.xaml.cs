@@ -1,6 +1,7 @@
 ﻿using ProServ.models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -21,12 +22,28 @@ namespace ProServ.Views
     /// <summary>
     /// Interaction logic for Login.xaml
     /// </summary>
-    public partial class Login : Page
+    public partial class Login : Page , INotifyPropertyChanged
     {
+        private string _inputNumber;
+        public string InputNumber
+        {
+            get => _inputNumber;
+            set
+            {
+                _inputNumber = value;
+                OnPropertyChanged(nameof(InputNumber));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+
+
         public Login()
         {
             InitializeComponent();
             
+            this.DataContext = this;
         }
 
         private async void LoginBtn_Click(object sender, RoutedEventArgs e)
@@ -98,6 +115,8 @@ namespace ProServ.Views
 
         }
 
+
+
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             //This is temporary code to bypass typing in a password. This autmatically selects a user and uses that as a login
@@ -115,6 +134,71 @@ namespace ProServ.Views
             GlobalAccess.globalAccess.LogIn(current);
 
             NavigationService.Navigate(homePage);
+        }
+
+        private void NumberButtonClick(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            string number = button.Content.ToString();
+
+            if (number == "↵")
+            {
+                if (InputNumber.Length > 0)
+                {
+                    InputNumber = InputNumber.Substring(0, InputNumber.Length - 1);
+                }
+            }
+            else
+            {
+                InputNumber += number;
+            }
+        }
+
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private async void LoginViaPinBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var userPin = 0;
+            try
+            {
+                userPin = Convert.ToInt32(InputNumber);
+                
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return;
+            }
+
+            Employee currentEmployee = await GlobalAccess.globalAccess.dbManager.GetEmployeeByPin(userPin);
+
+            if(currentEmployee != null)
+            {
+                //if login is successful then navigate to the home page and set the current user to the user logging in
+                HomePage homePage = new HomePage();
+
+                GlobalAccess.globalAccess.LogIn(currentEmployee);
+
+                NavigationService.Navigate(homePage);
+            }
+            else
+            {
+                Debug.WriteLine("Employee Returned Null");
+                this.LoginMessage_lb.Content = "There was an error in retrieving your information. Please contact system administrator";
+                return;
+            }
+        }
+
+        private void BackspaceButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(InputNumber))
+            {
+                InputNumber = InputNumber.Remove(InputNumber.Length - 1);
+            }
         }
     }
 }

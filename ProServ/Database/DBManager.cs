@@ -156,6 +156,11 @@ namespace ProServ.Database
             return await this._connection.Table<Employee>().ToListAsync();
         }
 
+        public async Task<Employee> GetEmployeeByPin(int pin)
+        {
+            return await this._connection.Table<Employee>().Where(n => n.pin == pin).FirstOrDefaultAsync();
+        }
+
         public async Task<bool> DeleteEmployee(Employee employee)
         {
             try

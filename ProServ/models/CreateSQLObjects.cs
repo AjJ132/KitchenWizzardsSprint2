@@ -16,6 +16,8 @@ namespace ProServ.models
         public List<Zone> zones { get; set; }
         public List<Table> tables { get; set; }
 
+        public List<Item> items { get; set; }
+
         
 
         //this is used to insert some standard empployees and passwords into the database
@@ -25,19 +27,35 @@ namespace ProServ.models
             this.loginCredentials = new List<LoginCredentials>();
             this.zones = new List<Zone>();
             this.tables = new List<Table>();
+            this.items = new List<Item>();
 
-            this.employees.Add(new Employee("AJ", "Johnson", "Chef", "aj132"));
+            this.employees.Add(new Employee("AJ", "Johnson", "Chef", 2848 ,"aj132"));
             this.loginCredentials.Add(new LoginCredentials("aj132_password"));
 
-            this.employees.Add(new Employee("John", "Smith", "Waiter", "johns42"));
+            this.employees.Add(new Employee("John", "Smith", "Waiter",1028 ,"johns42"));
             this.loginCredentials.Add(new LoginCredentials("johns42_password"));
 
-            this.employees.Add(new Employee("Jane", "Doe", "Busboy", "janed87"));
+            this.employees.Add(new Employee("Jane", "Doe", "Busboy", 4096 ,"janed87"));
             this.loginCredentials.Add(new LoginCredentials("janed87_password"));
 
             this.zones.Add(new Zone(101, "#FF5733"));
             this.zones.Add(new Zone(102, "#01D1FB"));
             this.zones.Add(new Zone(103, "#99FA77"));
+
+            //Food items
+            this.items.Add(new Item("J Burger", "Burgers", 6.99));
+            this.items.Add(new Item("Bacon Cheeseburger", "Burgers", 7.99));
+            this.items.Add(new Item("Carolina Burger", "Burgers", 7.99));
+            this.items.Add(new Item("Chicken Wrap", "Wraps", 6.49));
+            this.items.Add(new Item("Club Sandwich", "Sandwiches", 7.49));
+            this.items.Add(new Item("Garlic Chicken Pasta", "Entrees", 10.99));
+            this.items.Add(new Item("Steak", "Entrees", 18.99));
+            this.items.Add(new Item("Buffalo Wings", "Appetizers", 8.99));
+            this.items.Add(new Item("Mozzarella Sticks", "Appetizers", 6.99));
+            this.items.Add(new Item("Italian Salad", "Salads", 7.99));
+            this.items.Add(new Item("Caesar Salad", "Salads", 6.99));
+
+
 
             CreateTables();
         }
@@ -100,6 +118,11 @@ namespace ProServ.models
             foreach(var table in tables)
             {
                 await GlobalAccess.globalAccess.dbManager.InsertTable(table);
+            }
+
+            foreach(var item in items)
+            {
+                await GlobalAccess.globalAccess.dbManager.InsertItem(item);
             }
         }
 

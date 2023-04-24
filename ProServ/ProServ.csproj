@@ -9,7 +9,18 @@
 
   <ItemGroup>
     <None Remove="Images\Bacon Cheeseburger.jpg" />
+    <None Remove="Images\Buffalo Chicken Pasta.webp" />
+    <None Remove="Images\Buffalo Wings.jpg" />
+    <None Remove="Images\Caesar Salad.jpg" />
+    <None Remove="Images\Carolina Burger.jpg" />
+    <None Remove="Images\Chicken Wrap.jpg" />
+    <None Remove="Images\Club Sandwich.jpg" />
+    <None Remove="Images\Garlic Chicken Pasta.jpg" />
+    <None Remove="Images\Italian Salad.jpg" />
     <None Remove="Images\J Burger.jpg" />
+    <None Remove="Images\Mozzarella Sticks.jpg" />
+    <None Remove="Images\Mozzerlla Sticks.jpg" />
+    <None Remove="Images\Steak.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,7 +33,17 @@
 
   <ItemGroup>
     <Resource Include="Images\Bacon Cheeseburger.jpg" />
+    <Resource Include="Images\Buffalo Chicken Pasta.webp" />
+    <Resource Include="Images\Buffalo Wings.jpg" />
+    <Resource Include="Images\Caesar Salad.jpg" />
+    <Resource Include="Images\Carolina Burger.jpg" />
+    <Resource Include="Images\Chicken Wrap.jpg" />
+    <Resource Include="Images\Club Sandwich.jpg" />
+    <Resource Include="Images\Garlic Chicken Pasta.jpg" />
+    <Resource Include="Images\Italian Salad.jpg" />
     <Resource Include="Images\J Burger.jpg" />
+    <Resource Include="Images\Mozzarella Sticks.jpg" />
+    <Resource Include="Images\Steak.jpg" />
   </ItemGroup>
 
 </Project>

@@ -20,6 +20,8 @@ namespace ProServ.models
         //going to do a string for now but this may change in the future and be a class using polymorphism and extending
         public string employeeType { get; set; }
 
+        public int pin { get; set; }
+
         [DisallowNull]
         public string userName { get; set; }
 
@@ -31,11 +33,12 @@ namespace ProServ.models
 
 
         //this will be responsible for instatiating an employee by their id and a database search
-        public Employee(string fname, string lname, string employeeType, string username)
+        public Employee(string fname, string lname, string employeeType, int pin, string username)
         {
             this.firstName = fname;
             this.lastName = lname;
             this.employeeType = employeeType;
+            this.pin = pin;
             this.userName = username;
 
         }
