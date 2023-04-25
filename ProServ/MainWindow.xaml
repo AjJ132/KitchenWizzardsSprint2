@@ -14,19 +14,13 @@
 
 
 
-	<DockPanel Background="#454545">
-		<ToolBar DockPanel.Dock="Top">
-			<Button Content="File"/>
-			<Button Content="Edit"/>
-			<!-- Add more buttons for your commands here -->
-		</ToolBar>
-		<Grid>
-			<Grid>
-				<Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" />
-			</Grid>
-		</Grid>
-
-	</DockPanel>
+    <DockPanel Background="#454545">
+        <Grid>
+            <Grid>
+                <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" />
+            </Grid>
+        </Grid>
+    </DockPanel>
 
     
 </Window>

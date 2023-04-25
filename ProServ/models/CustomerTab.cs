@@ -38,7 +38,6 @@ namespace ProServ.models
             }
         }
 
-
         public double tabTotal { get; set; }
 
         public int tableId { get; set; }
@@ -101,5 +100,7 @@ namespace ProServ.models
             else { return; }
             
         }
+
+
     }
 }

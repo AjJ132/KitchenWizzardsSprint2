@@ -27,7 +27,8 @@
               Background="#454545">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.2*" />
-                <RowDefinition Height="0.6*" />
+                <RowDefinition Height="0.4*" />
+                <RowDefinition Height="0.2*" />
                 <RowDefinition Height="0.2*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -42,19 +43,22 @@
                         Height="90"
                         Width="300"
                         FontSize="60"/>
-                <Label FontSize="60" HorizontalContentAlignment="Left">
-                    <TextBlock >
-                        Selected Table: 
-						<Run Text="{Binding selectedCustomerTab.tableId}" />
-                    </TextBlock>
-                </Label>
+               
                 <Label FontSize="40" HorizontalContentAlignment="Left">
                     <TextBlock >
                         Tab ID:  
 						<Run Text="{Binding selectedCustomerTab.tabId}" />
                     </TextBlock>
                 </Label>
+                <Label FontSize="40" HorizontalContentAlignment="Left">
+                    <TextBlock >
+                        Table ID:  
+						<Run Text="{Binding selectedCustomerTab.tableId}" />
+                    </TextBlock>
+                </Label>
+                
             </StackPanel>
+            
             <ListBox ItemsSource="{Binding selectedCustomerTab.items}" 
                      Grid.Row="1"
                      Background="#454545"
@@ -83,7 +87,17 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Grid Grid.Row="2"
+
+            <Label FontSize="40" HorizontalContentAlignment="Left"
+                   Grid.Row="2">
+                <TextBlock >
+                        Total:  
+						<Run Text="{Binding selectedCustomerTab.tabTotal}" />
+                </TextBlock>
+            </Label>
+
+
+            <Grid Grid.Row="3"
                Grid.ColumnSpan="2">
                 <Button 
                     Content="Check Out"
@@ -92,6 +106,9 @@
                     Height="150"
                     Click="CheckOutButton_Click"/>
             </Grid>
+
+
+           
         </Grid>
         <!-- Tables -->
         <Grid Grid.Column="1"
@@ -119,9 +136,12 @@
         <!--Menu Section-->
         <Grid Grid.Column="1"
               Grid.Row="1"
-              x:Name="MenuGrid">
-            <TabControl FontSize="24">
-                <TabItem Header="Appetizers">
+              x:Name="MenuGrid"
+              Background="#454545">
+            <TabControl FontSize="24"
+                        Background="#454545">
+                <TabItem Header="Appetizers"
+                         BorderThickness="0">
                     <ScrollViewer HorizontalScrollBarVisibility="Auto"
                                     VerticalScrollBarVisibility="Disabled">
                         <ItemsControl ItemsSource="{Binding Appetizers}"
