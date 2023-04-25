@@ -122,10 +122,12 @@ namespace ProServ.models
 
         }
 
-        public void LogOut()
+        public bool LogOut()
         {
             //setting the employee to null is bound to cause issues will have to do for now
             this.currentEmployee = null;
+
+            return true;
         }
     }
 }

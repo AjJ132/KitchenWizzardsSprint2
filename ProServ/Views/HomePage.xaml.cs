@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ProServ.models;
+using SQLite;
 
 namespace ProServ.Views
 {
@@ -48,7 +50,18 @@ namespace ProServ.Views
             }
         }
 
-        
+
+        private OrderQueue _orderQueue;
+
+        public OrderQueue OrderQueue
+        {
+            get => _orderQueue;
+            set
+            {
+                _orderQueue = value;
+                NotifyPropertyChanged();
+            }
+        }
 
 
 
@@ -68,8 +81,9 @@ namespace ProServ.Views
 
             InitializeComponent();
 
-            //SetTableControls();
-            //AddTableControls();
+            SQLiteAsyncConnection connection = GlobalAccess.globalAccess.dbManager.GetConnection();
+
+            OrderQueue = new OrderQueue(connection);
 
             _ = InitializeAndAddTableControls();
 
@@ -81,6 +95,11 @@ namespace ProServ.Views
             
         }
 
+
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public async Task<Task> InitializeAndAddTableControls()
         {
@@ -265,6 +284,10 @@ namespace ProServ.Views
 
                 await GlobalAccess.globalAccess.dbManager.InsertForeignItem(new ForeignItem(clickedItem.itemId, this.selectedCustomerTab.tabId));
 
+                QueuedItem qItem = new QueuedItem(clickedItem.itemId, this.selectedCustomerTab.tabId, this.selectedTable.table.tableId, clickedItem.itemName);
+
+                this.OrderQueue.AddOrderAsync(qItem);
+
                 ShowCustomerTab();
 
             }
@@ -287,10 +310,53 @@ namespace ProServ.Views
                 }
             }
         }
+
+
+        
+
+
+
+
+
+        private async void MoveToBottom_Click(object sender, RoutedEventArgs e)
+        {
+            var queuedItem = (((sender as MenuItem).Parent as ContextMenu).PlacementTarget as Grid).DataContext as QueuedItem;
+            await OrderQueue.MoveOrderToBottomAsync(queuedItem);
+        }
+
+        private async void RemoveFromQueue_Click(object sender, RoutedEventArgs e)
+        {
+            var queuedItem = (((sender as MenuItem).Parent as ContextMenu).PlacementTarget as Grid).DataContext as QueuedItem;
+            await OrderQueue.RemoveOrderAsync(queuedItem);
+        }
+
+        private async void MoveToTop_Click(object sender, RoutedEventArgs e)
+        {
+            var queuedItem = (((sender as MenuItem).Parent as ContextMenu).PlacementTarget as Grid).DataContext as QueuedItem;
+
+
+            // Call the MoveOrderToTopAsync method with the queuedItem
+            await OrderQueue.MoveOrderToTopAsync(queuedItem);
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            String s = "";
+        }
+
+        private void Log_Out_Click(object sender, RoutedEventArgs e)
+        {
+            if(GlobalAccess.globalAccess.LogOut())
+            {
+
+                Login loginPage = new Login();
+                NavigationService.Navigate(loginPage);
+            }
+        }
     }
 
 
 
 
-    
+
 }

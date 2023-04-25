@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using ProServ.models;
@@ -65,6 +67,28 @@ namespace ProServ.Views
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+    }
+
+    public class EmployeeIdToPasswordConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (values == null || values.Length != 2 || values[0] == DependencyProperty.UnsetValue || values[1] == DependencyProperty.UnsetValue)
+            {
+                return Binding.DoNothing;
+            }
+
+            int employeeId = (int)values[0];
+            ObservableCollection<LoginCredentials> loginCredentials = (ObservableCollection<LoginCredentials>)values[1];
+
+            var matchingCredential = loginCredentials.FirstOrDefault(x => x.userId == employeeId);
+            return matchingCredential?.password ?? string.Empty;
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            return null;
         }
     }
 

@@ -68,8 +68,23 @@ namespace ProServ.Views
                 }
 
                 GlobalAccess.globalAccess.LogIn(currentEmployee);
+
+                if(currentEmployee.employeeType.Equals("Manager"))
+                {
+                    ManagerView view = new ManagerView();
+                    NavigationService.Navigate(view);
+                }
+                else if(currentEmployee.employeeType.Equals("Chef"))
+                {
+                    //need logic for chefs page!!!
+                    string s = ";";
+                }
+                else
+                {
+                    NavigationService.Navigate(homePage);
+                }
                 
-                NavigationService.Navigate(homePage);
+                
                
             }
             else
@@ -183,7 +198,19 @@ namespace ProServ.Views
 
                 GlobalAccess.globalAccess.LogIn(currentEmployee);
 
-                NavigationService.Navigate(homePage);
+                if (currentEmployee.employeeType.Equals("Manager"))
+                {
+                    NavigationService.Navigate(homePage);
+                }
+                else if (currentEmployee.employeeType.Equals("Chef"))
+                {
+                    //need logic for chefs page!!!
+                    string s = ";";
+                }
+                else
+                {
+                    NavigationService.Navigate(homePage);
+                }
             }
             else
             {
@@ -199,6 +226,15 @@ namespace ProServ.Views
             {
                 InputNumber = InputNumber.Remove(InputNumber.Length - 1);
             }
+        }
+
+        private async void bypass_Click(object sender, RoutedEventArgs e)
+        {
+
+            var manager = await GlobalAccess.globalAccess.dbManager.GetEmployeeByID(4);
+            GlobalAccess.globalAccess.LogIn(manager);
+            ManagerView view = new ManagerView();
+            NavigationService.Navigate(view);
         }
     }
 }
