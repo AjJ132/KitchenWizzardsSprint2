@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\MegaM\source\repos\KitchenWizzardsSprint2\ProServ\obj\Debug\net6.0-windows\
+C:\Users\AJ\Documents\C#\Sprint\ProServ\obj\Debug\net6.0-windows\
 ProServ
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-C:\Users\MegaM\source\repos\KitchenWizzardsSprint2\ProServ\App.xaml
-5-279096605
+C:\Users\AJ\Documents\C#\Sprint\ProServ\App.xaml
+6872107693
 
-211249654307
-199-59145137
-MainWindow.xaml;Views\HomePage.xaml;Views\Login.xaml;Views\MenuItemControl.XAML;Views\TableControl.xaml;
+24983388608
+1991231721590
+MainWindow.xaml;Views\HomePage.xaml;Views\Login.xaml;Views\ManagerView.xaml;Views\MenuItemControl.XAML;Views\TableControl.xaml;
 
 True
 

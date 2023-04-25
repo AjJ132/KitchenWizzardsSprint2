@@ -44,6 +44,7 @@ namespace ProServ.Database
                 await _connection.CreateTableAsync<Item>();
                 await _connection.CreateTableAsync<ItemCategory>();
                 await _connection.CreateTableAsync<ForeignItem>();
+                await _connection.CreateTableAsync<QueuedItem>();
                 
 
 
@@ -67,7 +68,10 @@ namespace ProServ.Database
            
         }
 
-
+        public SQLiteAsyncConnection GetConnection()
+        {
+            return this._connection;
+        }
 
 
 
@@ -184,6 +188,11 @@ namespace ProServ.Database
 
 
         //login credential functions
+
+        public async Task<LoginCredentials> GetLoginCredentialsByUserID(int userID)
+        {
+            return await this._connection.Table<LoginCredentials>().Where(n => n.userId == userID).FirstOrDefaultAsync();
+        }
 
         public async Task<bool> UpdateLoginCredentials(LoginCredentials loginCredentials)
         {

@@ -38,6 +38,9 @@ namespace ProServ.models
             this.employees.Add(new Employee("Jane", "Doe", "Busboy", 4096 ,"janed87"));
             this.loginCredentials.Add(new LoginCredentials("janed87_password"));
 
+            this.employees.Add(new Employee("Joe", "Johnson", "Manager", 8965, "jj2"));
+            this.loginCredentials.Add(new LoginCredentials("jj2ps"));
+
             this.zones.Add(new Zone(101, "#FF5733"));
             this.zones.Add(new Zone(102, "#01D1FB"));
             this.zones.Add(new Zone(103, "#99FA77"));
