@@ -200,5 +200,10 @@ namespace ProServ.Views
                 InputNumber = InputNumber.Remove(InputNumber.Length - 1);
             }
         }
+
+        private void Username_tb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

@@ -5,8 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ProServ.Views"
       Title="Login"
-      Height="1080"
-      Width="1920">
+      Width="{x:Static SystemParameters.PrimaryScreenWidth}"  
+      Height="{x:Static SystemParameters.PrimaryScreenHeight}" >
 
     <Grid Background="#454545">
         <Grid.RowDefinitions>
@@ -22,7 +22,7 @@
         <Label Grid.Row="0" Grid.Column="1" Content="ProServ" VerticalAlignment="Top"  FontSize="128" FontFamily="Arial Black" HorizontalAlignment="Center" Margin="0,79,0,0" Grid.RowSpan="2"/>
 
         <Grid Grid.Row="1"
-              Grid.Column="0" Margin="112,96,112,96">
+              Grid.Column="0" Margin="421,15,369,177" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -47,13 +47,13 @@
             </UniformGrid>
         </Grid>
 
-        <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Width="456" Margin="98,0,0,0" >
-            <Label Content="Login" FontSize="48" FontFamily="Arial Black" HorizontalAlignment="Center"/>
-            <Label Content="Username" FontSize="32" HorizontalAlignment="Center"/>
-            <TextBox x:Name="Username_tb" TextWrapping="Wrap" Width="225" Height="22" HorizontalAlignment="Center"/>
-            <Label Content="Password" FontSize="32" HorizontalAlignment="Center"/>
-            <TextBox x:Name="Password_tb" TextWrapping="Wrap" Width="224" Height="22" HorizontalAlignment="Center"/>
-            <Label x:Name="LoginMessage_lb" FontSize="22" HorizontalAlignment="Center"/>
+        <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Width="491" Margin="255,245,0,0" Grid.ColumnSpan="2" Height="506" Grid.RowSpan="2" >
+            <Label Content="Login" FontSize="78" FontFamily="Arial Black" HorizontalAlignment="Center"/>
+            <Label Content="Username" FontSize="48" HorizontalAlignment="Center"/>
+            <TextBox x:Name="Username_tb" TextWrapping="Wrap" Width="225" Height="48" HorizontalAlignment="Center" TextChanged="Username_tb_TextChanged"/>
+            <Label Content="Password" FontSize="48" HorizontalAlignment="Center"/>
+            <TextBox x:Name="Password_tb" TextWrapping="Wrap" Width="225" Height="48" HorizontalAlignment="Center"/>
+            <Label x:Name="LoginMessage_lb" FontSize="48" HorizontalAlignment="Center"/>
             <Button x:Name="LoginBtn" Content="Login" FontSize="48" Background="Green" Click="LoginBtn_Click" Height="74" Width="178"/>
         </StackPanel>
 
