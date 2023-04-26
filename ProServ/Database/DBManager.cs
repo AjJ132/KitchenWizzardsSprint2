@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls.Primitives;
 using ProServ.models;
 using SQLite;
 
@@ -45,6 +43,7 @@ namespace ProServ.Database
                 await _connection.CreateTableAsync<ItemCategory>();
                 await _connection.CreateTableAsync<ForeignItem>();
                 await _connection.CreateTableAsync<QueuedItem>();
+                await _connection.CreateTableAsync<DBLog>();
                 
 
 
@@ -73,7 +72,40 @@ namespace ProServ.Database
             return this._connection;
         }
 
+        public async void LogNow(string message)
+        {
+            string userName;
+            try
+            {
+                
 
+                if(GlobalAccess.globalAccess.currentEmployee == null)
+                {
+                    userName = "No User";
+                }
+                else
+                { 
+                    userName = GlobalAccess.globalAccess.currentEmployee.userName;
+                }
+            }
+            catch(Exception e)
+            {
+                userName = "No User";
+            }
+
+            DBLog log = new DBLog(message, userName);
+            await _connection.InsertAsync(log);
+        }
+
+        public async void InsertLog(DBLog log)
+        {
+            await _connection.InsertAsync(log);
+        }   
+
+        public async Task<List<DBLog>> GetLogs()
+        {
+            return await _connection.Table<DBLog>().ToListAsync();
+        }
 
         //Login functions
         public async Task<int> CheckUsername(string username)
@@ -114,6 +146,7 @@ namespace ProServ.Database
             try
             {
                 await _connection.UpdateAsync(employee);
+                LogNow("Updated employee record");
                 return true;
             }
             catch (Exception e)
@@ -145,6 +178,7 @@ namespace ProServ.Database
                     }
                 }
 
+                LogNow("Inserted Employee");
                 return true;
             }
             catch (Exception e)
@@ -170,6 +204,8 @@ namespace ProServ.Database
             try
             {
                 await _connection.DeleteAsync(employee);
+
+                LogNow("Deleted Employee");
                 return true;
             }
             catch (Exception e)
@@ -199,6 +235,7 @@ namespace ProServ.Database
             try
             {
                 await _connection.UpdateAsync(loginCredentials);
+                LogNow($"Updated login credentials. ID: {loginCredentials.userId}");
                 return true;
             }
             catch (Exception e)
@@ -214,6 +251,7 @@ namespace ProServ.Database
             try
             {
                 await _connection.InsertAsync(loginCredentials);
+                LogNow("Inserted Login Credentials");
                 return true;
             }
             catch (Exception e)
@@ -229,6 +267,7 @@ namespace ProServ.Database
             try
             {
                 await _connection.DeleteAsync(loginCredentials);
+                LogNow("Deleted Login Credentials");
                 return true;
             }
             catch (Exception e)
@@ -256,6 +295,7 @@ namespace ProServ.Database
             try
             {
                 await _connection.InsertAsync(zone);
+                LogNow($"Updated zone: {zone.zoneID}");
                 return true;
             }
             catch (Exception e)
@@ -271,6 +311,7 @@ namespace ProServ.Database
             try
             {
                 await _connection.UpdateAsync(zone);
+                LogNow("Updated zone");
                 return true;
             }
             catch (Exception e)
@@ -286,6 +327,7 @@ namespace ProServ.Database
             try
             {
                 await _connection.DeleteAsync(zone);
+                LogNow("Deleted Zone");
                 return true;
             }
             catch (Exception e)
@@ -313,6 +355,7 @@ namespace ProServ.Database
             try
             {
                 await _connection.InsertAsync(table);
+                LogNow("Inserted Table");
                 return true;
             }
             catch (Exception e)
@@ -328,6 +371,7 @@ namespace ProServ.Database
             try
             {
                 await _connection.UpdateAsync(table);
+                LogNow("Updated Table");
                 return true;
             }
             catch (Exception e)
@@ -343,6 +387,7 @@ namespace ProServ.Database
             try
             {
                 await _connection.DeleteAsync(table);
+                LogNow("Deleted Table");
                 return true;
             }
             catch (Exception e)
@@ -370,6 +415,7 @@ namespace ProServ.Database
             try
             {
                 await _connection.InsertAsync(tab);
+                LogNow("Inserted Customer Tab");
                 return true;
             }
             catch (Exception e)
@@ -385,6 +431,7 @@ namespace ProServ.Database
             try
             {
                 await _connection.UpdateAsync(tab);
+                LogNow("Updated Customer Tab");
                 return true;
             }
             catch (Exception e)
@@ -400,6 +447,7 @@ namespace ProServ.Database
             try
             {
                 await _connection.DeleteAsync(tab);
+                LogNow("Deleted Customer Tab");
                 return true;
             }
             catch (Exception e)
@@ -449,6 +497,8 @@ namespace ProServ.Database
             try
             {
                 await _connection.InsertAsync(item);
+
+                LogNow("Inserted Food Item");
                 return true;
             }
             catch (Exception e)
@@ -464,6 +514,7 @@ namespace ProServ.Database
             try
             {
                 await _connection.UpdateAsync(item);
+                LogNow("Updated food item");
                 return true;
             }
             catch (Exception e)
@@ -479,6 +530,7 @@ namespace ProServ.Database
             try
             {
                 await _connection.DeleteAsync(item);
+                LogNow("Deleted Item");
                 return true;
             }
             catch (Exception e)
@@ -507,6 +559,7 @@ namespace ProServ.Database
             try
             {
                 await _connection.InsertAsync(category);
+                LogNow("Insert Item Category");
                 return true;
             }
             catch (Exception e)
@@ -522,6 +575,7 @@ namespace ProServ.Database
             try
             {
                 await _connection.UpdateAsync(category);
+                LogNow("Updated Item Category");
                 return true;
             }
             catch (Exception e)
@@ -537,6 +591,7 @@ namespace ProServ.Database
             try
             {
                 await _connection.DeleteAsync(category);
+                LogNow("Deleted Item Category");
                 return true;
             }
             catch (Exception e)
@@ -574,6 +629,7 @@ namespace ProServ.Database
             try
             {
                 await _connection.InsertAsync(foreignItem);
+                LogNow("Inserted Item To ForeignItem Table");
                 return true;
             }
             catch (Exception e)
@@ -589,6 +645,7 @@ namespace ProServ.Database
             try
             {
                 await _connection.UpdateAsync(foreignItem);
+                LogNow("Updated Foreign Item");
                 return true;
             }
             catch (Exception e)
@@ -604,6 +661,7 @@ namespace ProServ.Database
             try
             {
                 var variable = await _connection.DeleteAsync(foreignItem);
+                LogNow("Deleted Foreign Item");
                 return true;
             }
             catch (Exception e)

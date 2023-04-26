@@ -10,7 +10,7 @@ namespace ProServ.models
     public class Employee
     {
         [PrimaryKey, AutoIncrement,]
-        public int Id { get; set; } = 1001;
+        public int Id { get; set; } = 0;
 
         [DisallowNull]
         public string firstName { get; set; }
@@ -41,6 +41,22 @@ namespace ProServ.models
             this.pin = pin;
             this.userName = username;
 
+        }
+
+        public Employee(bool createGeneric)
+        {
+            if(createGeneric)
+            {
+                this.firstName = "Default";
+                this.lastName = "Default";
+                this.employeeType = "Waiter";
+                this.pin = 1234;
+                this.userName= "Default";
+            }
+            else
+            {
+                return;
+            }
         }
     }
 }

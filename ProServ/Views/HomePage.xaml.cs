@@ -348,8 +348,8 @@ namespace ProServ.Views
         {
             if(GlobalAccess.globalAccess.LogOut())
             {
-
                 Login loginPage = new Login();
+                GlobalAccess.globalAccess.dbManager.LogNow("Logged Out");
                 NavigationService.Navigate(loginPage);
             }
         }

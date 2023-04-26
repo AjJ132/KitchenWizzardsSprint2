@@ -197,6 +197,7 @@ namespace ProServ.Views
                 HomePage homePage = new HomePage();
 
                 GlobalAccess.globalAccess.LogIn(currentEmployee);
+                GlobalAccess.globalAccess.dbManager.LogNow("Logged In");
 
                 if (currentEmployee.employeeType.Equals("Manager"))
                 {
@@ -205,7 +206,7 @@ namespace ProServ.Views
                 else if (currentEmployee.employeeType.Equals("Chef"))
                 {
                     //need logic for chefs page!!!
-                    string s = ";";
+                    NavigationService.Navigate(homePage);
                 }
                 else
                 {

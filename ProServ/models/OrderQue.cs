@@ -32,6 +32,7 @@ public class OrderQueue : INotifyPropertyChanged, INotifyCollectionChanged
         CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, order));
 
         await _connection.InsertAsync(order).ConfigureAwait(false);
+        GlobalAccess.globalAccess.dbManager.LogNow("Add Order To Que");
         NotifyPropertyChanged(nameof(Count));
         NotifyPropertyChanged(nameof(IsEmpty));
         NotifyPropertyChanged(nameof(NextOrder));
@@ -46,6 +47,7 @@ public class OrderQueue : INotifyPropertyChanged, INotifyCollectionChanged
         CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, order));
 
         await _connection.DeleteAsync(order).ConfigureAwait(false);
+        GlobalAccess.globalAccess.dbManager.LogNow("Deleted Order From Que");
         NotifyPropertyChanged(nameof(Count));
         NotifyPropertyChanged(nameof(IsEmpty));
         NotifyPropertyChanged(nameof(NextOrder));
@@ -58,6 +60,7 @@ public class OrderQueue : INotifyPropertyChanged, INotifyCollectionChanged
         queue.RemoveAt(0);
         CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, order));
         await _connection.DeleteAsync(order).ConfigureAwait(false);
+        GlobalAccess.globalAccess.dbManager.LogNow("Deleted Order From Que");
         NotifyPropertyChanged(nameof(Count));
         NotifyPropertyChanged(nameof(IsEmpty));
         NotifyPropertyChanged(nameof(NextOrder));

@@ -33,5 +33,14 @@ namespace ProServ.models
         {
             this.password = ps;
         }
+
+        public LoginCredentials(bool createGeneric)
+        {
+            if (createGeneric)
+            {
+                this.userId = 0;
+                this.password = "Default";
+            }
+        }
     }
 }

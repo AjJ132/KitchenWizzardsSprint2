@@ -3,7 +3,8 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:ProServ.Views"
+      xmlns:xctk="http://schemas/xceed.com/wpf/xaml/toolkit"
+      xmlns:local="clr-namespace:ProServ.Views" xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ManagerView">
@@ -13,100 +14,229 @@
         <local:EmployeeIdToPasswordConverter x:Key="EmployeeIdToPasswordConverter" />
     </Page.Resources>
 
-    <Grid Background="White"
-          HorizontalAlignment="Center"
-          Width="800">
-        <Grid.RowDefinitions>
-            <RowDefinition Height=".2*" />
-            <RowDefinition Height=".4*" />
-            <RowDefinition Height=".4*" />
-        </Grid.RowDefinitions>
-        
-        <Label Content="Manager View" 
+    <ScrollViewer>
+        <Grid>
+            <Label Content="Manager View" 
                FontSize="64"
                HorizontalAlignment="Center"
-               Grid.Row="0"/>
-        <StackPanel Grid.Row="1"
-                    Orientation="Vertical"
-                    Background="Red">
-            <DataGrid x:Name="EmployeeDataGrid"
+               VerticalAlignment="Top"
+               Margin="0,0,0,0"
+               Panel.ZIndex="1"/>
+
+            <!--Container-->
+            <StackPanel Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                    Panel.ZIndex="0">
+                <!--Employees-->
+                <Grid Background="White"
+          HorizontalAlignment="Center"
+          Width="800">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="200" />
+                        <RowDefinition Height=".2*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+
+                    <StackPanel Grid.Row="1"
+                    Orientation="Vertical">
+                        <Label Content="Employees"
+                   FontSize="32"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,0"/>
+                        <DataGrid x:Name="EmployeeDataGrid"
                       ItemsSource="{Binding Employees}"
                       SelectedItem="{Binding SelectedEmployee}"
                       AutoGenerateColumns="False"
-                      Margin="10,100,10,100"
-                      Grid.Row="1"
-                      Background="Blue">
-                <DataGrid.Columns>
-                    <!-- Add other DataGridTextColumn for each attribute of Employee -->
-                    <!-- Example: -->
-                    <DataGridTextColumn Header="Employee ID" Binding="{Binding Id}" />
-                    <DataGridTextColumn Header="First Name" Binding="{Binding firstName}" />
-                    <DataGridTextColumn Header="Last Name" Binding="{Binding lastName}" />
-                    <DataGridTextColumn Header="Last Name" Binding="{Binding employeeType}" />
-                    <DataGridTextColumn Header="Last Name" Binding="{Binding pin}" />
-                    <DataGridTextColumn Header="Last Name" Binding="{Binding userName}" />
+                      Margin="10,5,10,20"
+                      Grid.Row="1">
+                            <DataGrid.Columns>
+                                <!-- Add other DataGridTextColumn for each attribute of Employee -->
+                                <DataGridTextColumn Header="Employee ID" Binding="{Binding Id}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="First Name" Binding="{Binding firstName}" />
+                                <DataGridTextColumn Header="Last Name" Binding="{Binding lastName}" />
+                                <DataGridTextColumn Header="Position" Binding="{Binding employeeType}" />
+                                <DataGridTextColumn Header="Pin" Binding="{Binding pin}" />
+                                <DataGridTextColumn Header="User name" Binding="{Binding userName}" />
 
-                    <DataGridTemplateColumn Header="Password">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock>
-                                    <TextBlock.Text>
-                                        <MultiBinding Converter="{StaticResource EmployeeIdToPasswordConverter}">
-                                            <Binding Path="Id"/>
-                                            <!-- Replace 'EmployeeId' with the correct property name in your Employee class -->
-                                            <Binding Path="DataContext.Credentials" RelativeSource="{RelativeSource AncestorType=local:ManagerView}"/>
-                                        </MultiBinding>
-                                    </TextBlock.Text>
-                                </TextBlock>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                        <DataGridTemplateColumn.CellEditingTemplate>
-                            <DataTemplate>
-                                <TextBox LostFocus="PasswordTextBox_LostFocus">
-                                    <TextBox.Text>
-                                        <MultiBinding Converter="{StaticResource EmployeeIdToPasswordConverter}">
-                                            <Binding Path="Id"/>
-                                            <Binding Path="DataContext.Credentials" RelativeSource="{RelativeSource AncestorType=local:ManagerView}"/>
-                                        </MultiBinding>
-                                    </TextBox.Text>
-                                </TextBox>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellEditingTemplate>
+                                <DataGridTemplateColumn Header="Password">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock>
+                                                <TextBlock.Text>
+                                                    <MultiBinding Converter="{StaticResource EmployeeIdToPasswordConverter}">
+                                                        <Binding Path="Id"/>
+                                                        <Binding Path="DataContext.Credentials" RelativeSource="{RelativeSource AncestorType=local:ManagerView}"/>
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+
+                                    <DataGridTemplateColumn.CellEditingTemplate>
+                                        <DataTemplate>
+                                            <TextBox LostFocus="PasswordTextBox_LostFocus">
+                                                <TextBox.Text>
+                                                    <MultiBinding Converter="{StaticResource EmployeeIdToPasswordConverter}">
+                                                        <Binding Path="Id"/>
+                                                        <Binding Path="DataContext.Credentials" RelativeSource="{RelativeSource AncestorType=local:ManagerView}"/>
+                                                    </MultiBinding>
+                                                </TextBox.Text>
+                                            </TextBox>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellEditingTemplate>
 
 
 
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
 
-            <StackPanel Orientation="Horizontal"
-                        Background="Green">
-                <Button Content="Save Changes"
-                HorizontalAlignment="Left"
-                Margin="10,10,0,0"
+                        <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                            <Button Content="New Employee"
+                HorizontalAlignment="Center"
                 VerticalAlignment="Top"
-                Width="100"
-                Click="SaveChanges"
+                FontSize="28"
+                        Margin="0,0,10,0"
+                Click="NewEmployee_Click"/>
+
+                            <Button Content="Save Changes"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                        Margin="0,0,10,0"
+                        FontSize="28"
+                Click="SaveEmployeeChanges"
                         />
+                        </StackPanel>
+                    </StackPanel>
 
-                <Button Content="New Employee"
-                HorizontalAlignment="Left"
-                Margin="120,10,0,0"
+                    <StackPanel Grid.Row="2">
+                        <Label Content="Logs" 
+                           HorizontalAlignment="Center"
+                           FontSize="64"/>
+                        <DataGrid ItemsSource="{Binding Logs}"
+          AutoGenerateColumns="False"
+          IsReadOnly="True"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding LogId}" />
+                                <DataGridTextColumn Header="Action" Binding="{Binding LogAction}" />
+                                <DataGridTextColumn Header="Employee" Binding="{Binding Employee}" />
+                                <DataGridTextColumn Header="DateTime" Binding="{Binding LogDateTime}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+
+                </Grid>
+
+                <!--Zones, Tables, and Rows/Columns-->
+                <Grid Background="White"
+          HorizontalAlignment="Center"
+          Width="800">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="200" />
+                        <RowDefinition Height=".2*" />
+                        <RowDefinition Height=".6*" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Zones -->
+                    <StackPanel Grid.Row="1"
+                    Orientation="Vertical"
+                           CanVerticallyScroll="True"
+                            Background="Red">
+                        <Label Content="Zones"
+                   FontSize="32"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,0"/>
+
+                        <DataGrid x:Name="EmployeeDataGrid1"
+                      ItemsSource="{Binding Zones}"
+                      AutoGenerateColumns="False"
+                      Grid.Row="1"
+                              >
+                            <DataGrid.Columns>
+                                <!-- Add other DataGridTextColumn for each attribute of Zone -->
+                                <DataGridTextColumn Header="Zone ID" Binding="{Binding zoneID}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Zone Hex Color" Binding="{Binding zoneHexColor}" />
+
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                                >
+                            <Button Content="New Zone"
+                HorizontalAlignment="Center"
                 VerticalAlignment="Top"
-                Width="100"
-                Command="{Binding NewEmployeeCommand}"/>
-            </StackPanel>
-        </StackPanel>
+                FontSize="28"
+                Click="NewZone_Click"/>
 
-        <TextBox x:Name="EmployeeActivityTextBox"
-                 HorizontalAlignment="Center"
-                 
-                 VerticalAlignment="Center"
-                 Width="780"
-                 Height="90"
-                 Text="{Binding EmployeeActivityText}"
-                 TextWrapping="Wrap"
-                 Grid.Row="2"
-                 Background="Pink"/>
-    </Grid>
+                            <Button Content="Save Changes"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                        Margin="0,0,10,0"
+                        FontSize="28"
+                Click="SaveZoneChanges"
+                        />
+                        </StackPanel>
+                    </StackPanel>
+
+
+                    <!-- Tables and Columns/Rows -->
+                    <StackPanel Grid.Row="2"
+                                Orientation="Vertical">
+                        
+                        <!--Tables-->
+                        <StackPanel Margin="0,20,0,0"
+                                    Background="Pink"
+                                    Orientation="Vertical">
+                            <Label Content="Tables"
+                                   FontSize="32"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,0,0,0"/>   
+
+                            <DataGrid
+                      ItemsSource="{Binding Tables}"
+                      AutoGenerateColumns="False"
+                              >
+                                <DataGrid.Columns>
+                                    <!-- Add other DataGridTextColumn for each attribute of Zone -->
+                                    <DataGridTextColumn Header="Table ID" Binding="{Binding tableId}" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Seats Avaliable" Binding="{Binding seatsAvaliable}" />
+                                    <DataGridTextColumn Header="Zone ID" Binding="{Binding zoneID}" />
+                                    <DataGridTextColumn Header="Status" Binding="{Binding tableStatus}" IsReadOnly="True"/>
+                                    <DataGridTextColumn Header="Row ID" Binding="{Binding rowID}" />
+                                    <DataGridTextColumn Header="Column ID" Binding="{Binding columnID}" />
+
+
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                                <Button Content="New Table"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                FontSize="28"
+                Click="NewZone_Click"/>
+
+                                <Button Content="Save Changes"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                        Margin="0,0,10,0"
+                        FontSize="28"
+                Click="SaveZoneChanges"
+                        />
+                            </StackPanel>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
 </Page>

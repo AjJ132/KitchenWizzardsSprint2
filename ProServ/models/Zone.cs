@@ -24,5 +24,14 @@ namespace ProServ.models
             this.zoneID = id;
             this.zoneHexColor = zoneHexColor;
         }
+
+        public Zone(bool createGeneric)
+        {
+            if (createGeneric)
+            {
+                this.zoneID = 0;
+                this.zoneHexColor = "#000000";
+            }
+        }
     }
 }

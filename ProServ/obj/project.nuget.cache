@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "3Dsd7hztxKpTTlE/JB8ikWNPeNgrz+9DmhmF7j0UE2+ymXE7/Vg3asT35J+LyZoTAmoyBnVHJiocRD1/9khBOg==",
+  "dgSpecHash": "B84h/M/WfwvYB2bzoKOijiyX2hNwapalP6109vGB6xZJa67gZEO9DOJbOlLOf35bINjFn1J9SENg7MBetPyNAQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\AJ\\Documents\\C#\\Sprint\\ProServ\\ProServ.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\AJ\\.nuget\\packages\\extended.wpf.toolkit\\4.5.0\\extended.wpf.toolkit.4.5.0.nupkg.sha512",
     "C:\\Users\\AJ\\.nuget\\packages\\sqlite-net-pcl\\1.8.116\\sqlite-net-pcl.1.8.116.nupkg.sha512",
     "C:\\Users\\AJ\\.nuget\\packages\\sqlitepclraw.bundle_green\\2.0.4\\sqlitepclraw.bundle_green.2.0.4.nupkg.sha512",
     "C:\\Users\\AJ\\.nuget\\packages\\sqlitepclraw.core\\2.0.4\\sqlitepclraw.core.2.0.4.nupkg.sha512",
