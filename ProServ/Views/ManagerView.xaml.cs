@@ -105,7 +105,7 @@ namespace ProServ.Views
 
             
             DataContext = this;
-            InitializeComponent();
+            InitializeComponent(); 
 
 
 
