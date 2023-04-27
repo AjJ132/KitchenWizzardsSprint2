@@ -25,7 +25,8 @@
         <Grid Grid.Column="0"
               Grid.Row="0"
               Grid.RowSpan="2"
-              Background="#454545">
+              Background="Black"
+              >
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.2*" />
                 <RowDefinition Height="0.4*" />
@@ -46,13 +47,16 @@
                         FontSize="60"
                         Click="Log_Out_Click"/>
                
-                <Label FontSize="40" HorizontalContentAlignment="Left">
+                <Label FontSize="40" 
+                       Foreground="White"
+                       HorizontalContentAlignment="Left">
                     <TextBlock >
                         Tab ID:  
 						<Run Text="{Binding selectedCustomerTab.tabId}" />
                     </TextBlock>
                 </Label>
-                <Label FontSize="40" HorizontalContentAlignment="Left">
+                <Label Foreground="White"
+                    FontSize="40" HorizontalContentAlignment="Left">
                     <TextBlock >
                         Table ID:  
 						<Run Text="{Binding selectedCustomerTab.tableId}" />
@@ -63,19 +67,21 @@
             
             <ListBox ItemsSource="{Binding selectedCustomerTab.items}" 
                      Grid.Row="1"
-                     Background="#454545"
+                     Background="Black"
                      HorizontalAlignment="Stretch"
                      Width="Auto">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal"
                                     >
-                            <Label FontSize="30" HorizontalContentAlignment="Center">
+                            <Label Foreground="White"
+                                FontSize="30" HorizontalContentAlignment="Center">
                                 <TextBlock >
 									<Run Text="{Binding itemName}" />
                                 </TextBlock>
                             </Label>
-                            <Label FontSize="30">
+                            <Label Foreground="White"
+                                FontSize="30">
                                 <TextBlock >
 									<Run Text="{Binding itemPrice}" />
                                 </TextBlock>
@@ -91,10 +97,11 @@
             </ListBox>
 
             <Label FontSize="40" HorizontalContentAlignment="Left"
-                   Grid.Row="2">
+                   Grid.Row="2"
+                   Foreground="White">
                 <TextBlock >
                         Total:  
-						<Run Text="{Binding selectedCustomerTab.tabTotal}" />
+						<Run Text="{Binding selectedCustomerTab.TabTotal}" />
                 </TextBlock>
             </Label>
 
@@ -116,8 +123,7 @@
         <Grid Grid.Column="1"
               Grid.ColumnSpan="2"
               Grid.Row="0"
-              ShowGridLines="True"
-              Background="#454545"
+              Background="Black"
               x:Name="TableGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -140,41 +146,51 @@
         <Grid Grid.Column="1"
               Grid.Row="1"
               x:Name="MenuGrid"
-              Background="#454545">
+              Background="Black">
             <TabControl FontSize="24"
-                        Background="#454545">
+                        Background="Black">
+
                 <TabItem Header="Appetizers"
-                         BorderThickness="0">
+         BorderThickness="0">
                     <ScrollViewer HorizontalScrollBarVisibility="Auto"
-                                    VerticalScrollBarVisibility="Disabled">
+                  VerticalScrollBarVisibility="Disabled">
                         <ItemsControl ItemsSource="{Binding Appetizers}"
-                                      HorizontalAlignment="Left"
-                                      VerticalAlignment="Center">
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Center">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Border BorderBrush="Black"
-                                            BorderThickness="1"
-                                            Margin="5"
-                                            Padding="5"
-                                    CornerRadius="20">
-                                        <StackPanel Width="400"
-                                                    PreviewMouseDown="StackPanel_MouseLeftButtonDown">
-                                            <Image Width="Auto"
-                                           Height="275">
+                            BorderThickness="1"
+                            Margin="5"
+                            Padding="5"
+                            CornerRadius="20">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.8*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Image Grid.Row="0"
+                                   Width="Auto"
+                                   MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Grid}}"
+                                   MaxHeight="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Grid}}"
+                                   Stretch="Uniform">
                                                 <Image.Source>
                                                     <BitmapImage UriSource="{Binding imagePath}" />
                                                 </Image.Source>
                                             </Image>
-                                            <TextBlock Text="{Binding itemName}" 
-                                   FontSize="40"
-                                   HorizontalAlignment="Center"/>
-                                            <StackPanel.ContextMenu>
+                                            <TextBlock Grid.Row="1"
+                                       Text="{Binding itemName}" 
+                                       FontSize="40"
+                                       HorizontalAlignment="Center"
+                                                       Foreground="White"/>
+                                            <Grid.ContextMenu>
                                                 <ContextMenu>
                                                     <MenuItem Header="Add to tab" 
-                                                      Click="MenuItem_AddToTab"/>
+                                              Click="MenuItem_AddToTab"/>
                                                 </ContextMenu>
-                                            </StackPanel.ContextMenu>
-                                        </StackPanel>
+                                            </Grid.ContextMenu>
+                                        </Grid>
                                     </Border>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -199,24 +215,33 @@
                                             Margin="5"
                                             Padding="5"
                                     CornerRadius="20">
-                                        <StackPanel Width="400"
-                                                    PreviewMouseDown="StackPanel_MouseLeftButtonDown">
-                                            <Image Width="Auto"
-                                           Height="275">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.8*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Image Grid.Row="0"
+                                   Width="Auto"
+                                   MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Grid}}"
+                                   MaxHeight="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Grid}}"
+                                   Stretch="Uniform">
                                                 <Image.Source>
                                                     <BitmapImage UriSource="{Binding imagePath}" />
                                                 </Image.Source>
                                             </Image>
-                                            <TextBlock Text="{Binding itemName}" 
-                                   FontSize="40"
-                                   HorizontalAlignment="Center"/>
-                                            <StackPanel.ContextMenu>
+                                            <TextBlock Grid.Row="1"
+                                       Text="{Binding itemName}" 
+                                       FontSize="40"
+                                                       Foreground="White"
+                                       HorizontalAlignment="Center"/>
+                                            <Grid.ContextMenu>
                                                 <ContextMenu>
                                                     <MenuItem Header="Add to tab" 
-                                                      Click="MenuItem_AddToTab"/>
+                                              Click="MenuItem_AddToTab"/>
                                                 </ContextMenu>
-                                            </StackPanel.ContextMenu>
-                                        </StackPanel>
+                                            </Grid.ContextMenu>
+                                        </Grid>
                                     </Border>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -241,24 +266,33 @@
                                             Margin="5"
                                             Padding="5"
                                     CornerRadius="20">
-                                        <StackPanel Width="400"
-                                                    PreviewMouseDown="StackPanel_MouseLeftButtonDown">
-                                            <Image Width="Auto"
-                                           Height="275">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.8*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Image Grid.Row="0"
+                                   Width="Auto"
+                                   MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Grid}}"
+                                   MaxHeight="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Grid}}"
+                                   Stretch="Uniform">
                                                 <Image.Source>
                                                     <BitmapImage UriSource="{Binding imagePath}" />
                                                 </Image.Source>
                                             </Image>
-                                            <TextBlock Text="{Binding itemName}" 
-                                   FontSize="40"
-                                   HorizontalAlignment="Center"/>
-                                            <StackPanel.ContextMenu>
+                                            <TextBlock Grid.Row="1"
+                                       Text="{Binding itemName}" 
+                                       FontSize="40"
+                                       HorizontalAlignment="Center"
+                                                       Foreground="White"/>
+                                            <Grid.ContextMenu>
                                                 <ContextMenu>
                                                     <MenuItem Header="Add to tab" 
-                                                      Click="MenuItem_AddToTab"/>
+                                              Click="MenuItem_AddToTab"/>
                                                 </ContextMenu>
-                                            </StackPanel.ContextMenu>
-                                        </StackPanel>
+                                            </Grid.ContextMenu>
+                                        </Grid>
                                     </Border>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -283,24 +317,33 @@
                                             Margin="5"
                                             Padding="5"
                                     CornerRadius="20">
-                                        <StackPanel Width="400"
-                                                    PreviewMouseDown="StackPanel_MouseLeftButtonDown">
-                                            <Image Width="Auto"
-                                           Height="275">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.8*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Image Grid.Row="0"
+                                   Width="Auto"
+                                   MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Grid}}"
+                                   MaxHeight="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Grid}}"
+                                   Stretch="Uniform">
                                                 <Image.Source>
                                                     <BitmapImage UriSource="{Binding imagePath}" />
                                                 </Image.Source>
                                             </Image>
-                                            <TextBlock Text="{Binding itemName}" 
-                                   FontSize="40"
-                                   HorizontalAlignment="Center"/>
-                                            <StackPanel.ContextMenu>
+                                            <TextBlock Grid.Row="1"
+                                       Text="{Binding itemName}" 
+                                       FontSize="40"
+                                                       Foreground="White"
+                                       HorizontalAlignment="Center"/>
+                                            <Grid.ContextMenu>
                                                 <ContextMenu>
                                                     <MenuItem Header="Add to tab" 
-                                                      Click="MenuItem_AddToTab"/>
+                                              Click="MenuItem_AddToTab"/>
                                                 </ContextMenu>
-                                            </StackPanel.ContextMenu>
-                                        </StackPanel>
+                                            </Grid.ContextMenu>
+                                        </Grid>
                                     </Border>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -325,24 +368,33 @@
                                             Margin="5"
                                             Padding="5"
                                     CornerRadius="20">
-                                        <StackPanel Width="400"
-                                                    PreviewMouseDown="StackPanel_MouseLeftButtonDown">
-                                            <Image Width="Auto"
-                                           Height="275">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.8*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Image Grid.Row="0"
+                                   Width="Auto"
+                                   MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Grid}}"
+                                   MaxHeight="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Grid}}"
+                                   Stretch="Uniform">
                                                 <Image.Source>
                                                     <BitmapImage UriSource="{Binding imagePath}" />
                                                 </Image.Source>
                                             </Image>
-                                            <TextBlock Text="{Binding itemName}" 
-                                   FontSize="40"
-                                   HorizontalAlignment="Center"/>
-                                            <StackPanel.ContextMenu>
+                                            <TextBlock Grid.Row="1"
+                                       Text="{Binding itemName}" 
+                                       FontSize="40"
+                                                       Foreground="White"
+                                       HorizontalAlignment="Center"/>
+                                            <Grid.ContextMenu>
                                                 <ContextMenu>
                                                     <MenuItem Header="Add to tab" 
-                                                      Click="MenuItem_AddToTab"/>
+                                              Click="MenuItem_AddToTab"/>
                                                 </ContextMenu>
-                                            </StackPanel.ContextMenu>
-                                        </StackPanel>
+                                            </Grid.ContextMenu>
+                                        </Grid>
                                     </Border>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -367,24 +419,33 @@
                                             Margin="5"
                                             Padding="5"
                                     CornerRadius="20">
-                                        <StackPanel Width="400"
-                                                    PreviewMouseDown="StackPanel_MouseLeftButtonDown">
-                                            <Image Width="Auto"
-                                           Height="275">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.8*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Image Grid.Row="0"
+                                   Width="Auto"
+                                   MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Grid}}"
+                                   MaxHeight="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Grid}}"
+                                   Stretch="Uniform">
                                                 <Image.Source>
                                                     <BitmapImage UriSource="{Binding imagePath}" />
                                                 </Image.Source>
                                             </Image>
-                                            <TextBlock Text="{Binding itemName}" 
-                                   FontSize="40"
-                                   HorizontalAlignment="Center"/>
-                                            <StackPanel.ContextMenu>
+                                            <TextBlock Grid.Row="1"
+                                       Text="{Binding itemName}" 
+                                       FontSize="40"
+                                                       Foreground="White"
+                                       HorizontalAlignment="Center"/>
+                                            <Grid.ContextMenu>
                                                 <ContextMenu>
                                                     <MenuItem Header="Add to tab" 
-                                                      Click="MenuItem_AddToTab"/>
+                                              Click="MenuItem_AddToTab"/>
                                                 </ContextMenu>
-                                            </StackPanel.ContextMenu>
-                                        </StackPanel>
+                                            </Grid.ContextMenu>
+                                        </Grid>
                                     </Border>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -409,24 +470,33 @@
                                             Margin="5"
                                             Padding="5"
                                     CornerRadius="20">
-                                        <StackPanel Width="400"
-                                                    PreviewMouseDown="StackPanel_MouseLeftButtonDown">
-                                            <Image Width="Auto"
-                                           Height="275">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.8*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Image Grid.Row="0"
+                                   Width="Auto"
+                                   MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Grid}}"
+                                   MaxHeight="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Grid}}"
+                                   Stretch="Uniform">
                                                 <Image.Source>
                                                     <BitmapImage UriSource="{Binding imagePath}" />
                                                 </Image.Source>
                                             </Image>
-                                            <TextBlock Text="{Binding itemName}" 
-                                   FontSize="40"
-                                   HorizontalAlignment="Center"/>
-                                            <StackPanel.ContextMenu>
+                                            <TextBlock Grid.Row="1"
+                                       Text="{Binding itemName}" 
+                                       FontSize="40"
+                                                       Foreground="White"
+                                       HorizontalAlignment="Center"/>
+                                            <Grid.ContextMenu>
                                                 <ContextMenu>
                                                     <MenuItem Header="Add to tab" 
-                                                      Click="MenuItem_AddToTab"/>
+                                              Click="MenuItem_AddToTab"/>
                                                 </ContextMenu>
-                                            </StackPanel.ContextMenu>
-                                        </StackPanel>
+                                            </Grid.ContextMenu>
+                                        </Grid>
                                     </Border>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>

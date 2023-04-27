@@ -15,15 +15,20 @@
         <local:StatusToColorConverter x:Key="StatusToColorConverter"/>
     </UserControl.Resources>
 
-    <Grid Background="{Binding table.zoneID, Converter={StaticResource ZoneToColorConverter}}">
+    <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Label Content="{Binding table.zoneID}" />
-
+        <Border Grid.Column="0"
+            Grid.Row="0"
+            BorderBrush="{Binding table.zoneID, Converter={StaticResource ZoneToColorConverter}}"
+            BorderThickness="5"
+            Padding="10">
+            <Label Content="{Binding table.zoneID}" />
+        </Border>
         <Grid>
             <Rectangle 
 			x:Name="TableRectangle"

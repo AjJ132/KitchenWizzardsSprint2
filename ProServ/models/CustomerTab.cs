@@ -22,7 +22,7 @@ namespace ProServ.models
 
         public String dateTimeClosed { get; set; }
 
-        
+       
         private ObservableCollection<Item> _items;
         [Ignore]
         public ObservableCollection<Item> items
@@ -38,7 +38,21 @@ namespace ProServ.models
             }
         }
 
-        public double tabTotal { get; set; }
+        
+        private double _tabTotal;
+
+        public double TabTotal
+        {
+            get { return _tabTotal; }
+            set
+            {
+                if (_tabTotal != value)
+                {
+                    _tabTotal = value;
+                    OnPropertyChanged(nameof(TabTotal));
+                }
+            }
+        }
 
         public int tableId { get; set; }
 
@@ -48,12 +62,12 @@ namespace ProServ.models
         public CustomerTab()
         {
             this.items = new ObservableCollection<Item>();
-            this.tabTotal = 0;
+            this.TabTotal = 0;
         }
         public CustomerTab(int tableId)
         {
             this.items = new ObservableCollection<Item>();
-            this.tabTotal = 0;
+            this.TabTotal = 0;
             this.tableId = tableId;
             this.customerId = 0;
             this.tabClosed = false;
@@ -69,15 +83,16 @@ namespace ProServ.models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public double GetTabTotal()
+        public void GetTabTotal()
         {
+            double total = 0;
             foreach (var item in items)
             {
-                //this.tabTotal += item.
+                total += item.itemPrice;
     
             }
 
-            return tabTotal;
+            this.TabTotal = total;
         }
 
         public async void RemoveItemById(Item itemToRemove)

@@ -115,6 +115,7 @@ namespace ProServ.Views
                     var tab = await GlobalAccess.globalAccess.dbManager.GetOpenTabByTableId(i.tableId).ConfigureAwait(false);
                     var foreignItems = await GlobalAccess.globalAccess.dbManager.GetForeignItemByTabId(tab.tabId).ConfigureAwait(false);
 
+
                     foreach(var n in foreignItems)
                     {
                         Item item = await GlobalAccess.globalAccess.dbManager.GetItemByID(n.itemId);
@@ -122,6 +123,7 @@ namespace ProServ.Views
                     }
                     
                     i.SetCustomerTab(tab);
+                    i.currentTab.GetTabTotal();
                 }
 
                 await Application.Current.Dispatcher.InvokeAsync(() =>
@@ -177,7 +179,7 @@ namespace ProServ.Views
         private void ShowCustomerTab()
         {
             this.selectedCustomerTab = selectedTable.table.currentTab;
-            string s = "";
+            
         }
 
         
@@ -287,6 +289,7 @@ namespace ProServ.Views
                 QueuedItem qItem = new QueuedItem(clickedItem.itemId, this.selectedCustomerTab.tabId, this.selectedTable.table.tableId, clickedItem.itemName);
 
                 this.OrderQueue.AddOrderAsync(qItem);
+                this.selectedCustomerTab.GetTabTotal();
 
                 ShowCustomerTab();
 
