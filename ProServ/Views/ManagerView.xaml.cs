@@ -78,6 +78,7 @@ namespace ProServ.Views
 
         public bool newZoneCreated = false;
 
+        public bool newTableCreated = false;
 
 
         private string _employeeActivityText;
@@ -360,6 +361,16 @@ namespace ProServ.Views
             }
         }
 
+        private void Log_Out_Click(object sender, RoutedEventArgs e)
+        {
+            if (GlobalAccess.globalAccess.LogOut())
+            {
+                Login loginPage = new Login();
+                GlobalAccess.globalAccess.dbManager.LogNow("Logged Out");
+                NavigationService.Navigate(loginPage);
+            }
+        }
+
         private async void SaveZoneChanges(object sender, RoutedEventArgs e)
         {
             if (newZoneCreated)
@@ -391,6 +402,17 @@ namespace ProServ.Views
             }
         }
 
+        private async void SaveTableChanges(object sender, RoutedEventArgs e)
+        {
+            foreach (var i in Tables)
+            {
+                if (ValidateTable(i))
+                {
+                    await GlobalAccess.globalAccess.dbManager.UpdateTable(i);
+                }
+            }            
+        }
+
         private bool ValidateZone(Zone zone)
         {
             // Add a leading "#" if it is missing
@@ -411,34 +433,73 @@ namespace ProServ.Views
 
             return true;
         }
+
+        private bool ValidateTable(Table table)
+        {
+            if (table.tableId == 0)
+            {
+                MessageBox.Show("Table ID cannot be zero.");
+                return false;
+            }
+
+            if (table.seatsAvaliable < 0)
+            {
+                MessageBox.Show("Seats available cannot be negative.");
+                return false;
+            }
+
+            if (table.seatsTaken < 0)
+            {
+                MessageBox.Show("Seats taken cannot be negative.");
+                return false;
+            }
+
+            if (table.zoneID == 0)
+            {
+                MessageBox.Show("Zone ID cannot be zero.");
+                return false;
+            }
+
+            if (table.tableStatus < 0 || table.tableStatus > 2)
+            {
+                MessageBox.Show("Table status must be between 0 and 2.");
+                return false;
+            }
+
+            if (table.rowID < 0)
+            {
+                MessageBox.Show("Row ID cannot be negative.");
+                return false;
+            }
+
+            if (table.columnID < 0)
+            {
+                MessageBox.Show("Column ID cannot be negative.");
+                return false;
+            }
+
+
+            return true;
+        }
+
+
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextAllowed(e.Text);
+        }
+
+        private static bool IsTextAllowed(string text)
+        {
+            int result;
+            return int.TryParse(text, out result);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
-    public class RelayCommand : ICommand
-    {
-        private readonly Action<object> _execute;
-        private readonly Predicate<object> _canExecute;
 
-        public RelayCommand(Action<object> execute, Predicate<object> canExecute = null)
-        {
-            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
-            _canExecute = canExecute;
-        }
-
-        public bool CanExecute(object parameter)
-        {
-            return _canExecute == null || _canExecute(parameter);
-        }
-
-        public void Execute(object parameter)
-        {
-            _execute(parameter);
-        }
-
-        public event EventHandler CanExecuteChanged
-        {
-            add => CommandManager.RequerySuggested += value;
-            remove => CommandManager.RequerySuggested -= value;
-        }
-    }
 }
 

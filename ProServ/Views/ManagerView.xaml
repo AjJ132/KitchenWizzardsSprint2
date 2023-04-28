@@ -4,7 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:xctk="http://schemas/xceed.com/wpf/xaml/toolkit"
-      xmlns:local="clr-namespace:ProServ.Views" xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:local="clr-namespace:ProServ.Views" 
+      xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ManagerView">
@@ -15,29 +16,34 @@
     </Page.Resources>
 
     <ScrollViewer>
-        <Grid>
-            <Label Content="Manager View" 
-               FontSize="64"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Top"
-               Margin="0,0,0,0"
-               Panel.ZIndex="1"/>
+        <Grid  Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".15*" />
+                <RowDefinition Height=".85*" />
+            </Grid.RowDefinitions>
 
-            <!--Container-->
-            <StackPanel Orientation="Horizontal"
-                HorizontalAlignment="Center"
-                    Panel.ZIndex="0">
-                <!--Employees-->
-                <Grid Background="White"
-          HorizontalAlignment="Center"
-          Width="800">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="200" />
-                        <RowDefinition Height=".2*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Vertical" 
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2">
+                <Label Content="Manager View" FontSize="48"/>
+                <Button Content="Log-out" Click="Log_Out_Click" Width="150" FontSize="30"/>
+            </StackPanel>
 
+            <Grid Grid.Column="0"
+                  Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
+                <!-- Employees Section -->
+                <GroupBox Grid.Row="1" Header="Employees" Margin="10"
+                          Height="475">
                     <StackPanel Grid.Row="1"
                     Orientation="Vertical">
                         <Label Content="Employees"
@@ -46,9 +52,8 @@
                    Margin="0,0,0,0"/>
                         <DataGrid x:Name="EmployeeDataGrid"
                       ItemsSource="{Binding Employees}"
-                      SelectedItem="{Binding SelectedEmployee}"
                       AutoGenerateColumns="False"
-                      Margin="10,5,10,20"
+                      Margin="10,0,10,20"
                       Grid.Row="1">
                             <DataGrid.Columns>
                                 <!-- Add other DataGridTextColumn for each attribute of Employee -->
@@ -98,6 +103,7 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
                 FontSize="28"
+                                    Padding="5"
                         Margin="0,0,10,0"
                 Click="NewEmployee_Click"/>
 
@@ -105,47 +111,59 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
                         Margin="0,0,10,0"
+                                    Padding="5"
                         FontSize="28"
                 Click="SaveEmployeeChanges"
                         />
                         </StackPanel>
                     </StackPanel>
+                </GroupBox>
 
-                    <StackPanel Grid.Row="2">
-                        <Label Content="Logs" 
+                <!-- Logs Section -->
+                <GroupBox Grid.Row="2" Header="Logs" Margin="10"
+                          Height="475">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="500"
+                                  Grid.Row="2">
+                        <StackPanel>
+                            <Label Content="Logs" 
                            HorizontalAlignment="Center"
-                           FontSize="64"/>
-                        <DataGrid ItemsSource="{Binding Logs}"
+                           FontSize="32"/>
+                            <DataGrid ItemsSource="{Binding Logs}"
           AutoGenerateColumns="False"
           IsReadOnly="True"
           CanUserAddRows="False"
           CanUserDeleteRows="False">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="ID" Binding="{Binding LogId}" />
-                                <DataGridTextColumn Header="Action" Binding="{Binding LogAction}" />
-                                <DataGridTextColumn Header="Employee" Binding="{Binding Employee}" />
-                                <DataGridTextColumn Header="DateTime" Binding="{Binding LogDateTime}" />
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </StackPanel>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ID" Binding="{Binding LogId}" />
+                                    <DataGridTextColumn Header="Action" Binding="{Binding LogAction}" />
+                                    <DataGridTextColumn Header="Employee" Binding="{Binding Employee}" />
+                                    <DataGridTextColumn Header="DateTime" Binding="{Binding LogDateTime}" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+                    </ScrollViewer>
 
-                </Grid>
+                </GroupBox>
+            </Grid>
 
-                <!--Zones, Tables, and Rows/Columns-->
-                <Grid Background="White"
-          HorizontalAlignment="Center"
-          Width="800">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="200" />
-                        <RowDefinition Height=".2*" />
-                        <RowDefinition Height=".6*" />
-                    </Grid.RowDefinitions>
+            <Grid Grid.Column="1"
+                  Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-                    <!-- Zones -->
+                <!-- Empty Row for Alignment -->
+                <Grid Grid.Row="0"/>
+
+                <!-- Zones Section -->
+                <GroupBox Grid.Row="1" Header="Zones" Margin="10"
+                          Height="475">
                     <StackPanel Grid.Row="1"
                     Orientation="Vertical"
                            CanVerticallyScroll="True"
-                            Background="Red">
+                            >
                         <Label Content="Zones"
                    FontSize="32"
                    HorizontalAlignment="Center"
@@ -155,6 +173,7 @@
                       ItemsSource="{Binding Zones}"
                       AutoGenerateColumns="False"
                       Grid.Row="1"
+                                  Margin="10,0,10,20"
                               >
                             <DataGrid.Columns>
                                 <!-- Add other DataGridTextColumn for each attribute of Zone -->
@@ -167,76 +186,125 @@
 
                         <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right"
-                                >
+                                Margin="10,0,10,20">
                             <Button Content="New Zone"
                 HorizontalAlignment="Center"
+                                    Padding="5"
                 VerticalAlignment="Top"
                 FontSize="28"
+                                    Margin="0,0,10,0"
                 Click="NewZone_Click"/>
 
                             <Button Content="Save Changes"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
+                                    Padding="5"
                         Margin="0,0,10,0"
                         FontSize="28"
                 Click="SaveZoneChanges"
                         />
                         </StackPanel>
                     </StackPanel>
+                </GroupBox>
 
+                <!-- Tables Section -->
+                <GroupBox Grid.Row="2" Header="Tables" Margin="10" Height="475">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                    <!-- Tables and Columns/Rows -->
-                    <StackPanel Grid.Row="2"
-                                Orientation="Vertical">
-                        
-                        <!--Tables-->
-                        <StackPanel Margin="0,20,0,0"
-                                    Background="Pink"
-                                    Orientation="Vertical">
-                            <Label Content="Tables"
+                        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" MaxHeight="500">
+                            <StackPanel Margin="0,0,0,0"
+                                    Orientation="Vertical"
+                                    CanVerticallyScroll="True">
+
+                                <Label Content="Tables"
                                    FontSize="32"
                                    HorizontalAlignment="Center"
-                                   Margin="0,0,0,0"/>   
+                                   Margin="0,0,0,0"/>
 
-                            <DataGrid
+                                <DataGrid
                       ItemsSource="{Binding Tables}"
                       AutoGenerateColumns="False"
                               >
-                                <DataGrid.Columns>
-                                    <!-- Add other DataGridTextColumn for each attribute of Zone -->
-                                    <DataGridTextColumn Header="Table ID" Binding="{Binding tableId}" IsReadOnly="True"/>
-                                    <DataGridTextColumn Header="Seats Avaliable" Binding="{Binding seatsAvaliable}" />
-                                    <DataGridTextColumn Header="Zone ID" Binding="{Binding zoneID}" />
-                                    <DataGridTextColumn Header="Status" Binding="{Binding tableStatus}" IsReadOnly="True"/>
-                                    <DataGridTextColumn Header="Row ID" Binding="{Binding rowID}" />
-                                    <DataGridTextColumn Header="Column ID" Binding="{Binding columnID}" />
+                                    <DataGrid.Columns>
+                                        <!-- Add other DataGridTextColumn for each attribute of Zone -->
+                                        <DataGridTextColumn Header="Table ID" Binding="{Binding tableId}" IsReadOnly="True"/>
+                                        <DataGridTemplateColumn Header="Seats Avaliable">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding seatsAvaliable}"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                            <DataGridTemplateColumn.CellEditingTemplate>
+                                                <DataTemplate>
+                                                    <TextBox Text="{Binding seatsAvaliable, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="TextBox_PreviewTextInput"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellEditingTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Header="Zone ID">
+                                            <!-- Repeat similar DataGridTemplateColumn structure for "Zone ID", "Row ID", and "Column ID" -->
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding zoneID}"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                            <DataGridTemplateColumn.CellEditingTemplate>
+                                                <DataTemplate>
+                                                    <TextBox Text="{Binding zoneID, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="TextBox_PreviewTextInput"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellEditingTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Header="Status" Binding="{Binding tableStatus}" IsReadOnly="True"/>
+                                        <DataGridTemplateColumn Header="Row ID">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding rowID}"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                            <DataGridTemplateColumn.CellEditingTemplate>
+                                                <DataTemplate>
+                                                    <TextBox Text="{Binding rowID, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="TextBox_PreviewTextInput"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellEditingTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Header="Column ID">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding columnID}"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                            <DataGridTemplateColumn.CellEditingTemplate>
+                                                <DataTemplate>
+                                                    <TextBox Text="{Binding columnID, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="TextBox_PreviewTextInput"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellEditingTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
 
-
-                                </DataGrid.Columns>
-                            </DataGrid>
-
-                            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Right">
-                                <Button Content="New Table"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                FontSize="28"
-                Click="NewZone_Click"/>
-
-                                <Button Content="Save Changes"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                        Margin="0,0,10,0"
-                        FontSize="28"
-                Click="SaveZoneChanges"
-                        />
                             </StackPanel>
+                        </ScrollViewer>
+
+                        <!-- Save Table button -->
+                        <StackPanel Grid.Row="1" Orientation="Horizontal"
+            HorizontalAlignment="Right">
+                            <Button Content="Save Changes"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0,10,20,10"
+                                    Padding="5"
+                    FontSize="28"
+                    Click="SaveTableChanges"
+                    />
                         </StackPanel>
+                    </Grid>
+                </GroupBox>
 
-                    </StackPanel>
-
-                </Grid>
-            </StackPanel>
+            </Grid>
         </Grid>
     </ScrollViewer>
+
 </Page>
